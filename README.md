@@ -1,7 +1,7 @@
 # Raid BLT
 An open source Lua hook for Raid, designed and created for ease of use for both players and modders.  
 This is the developer repository.
-The Lua component of the BLT which controls mod loading can be found in it's own repository, [Payday-2-BLT-Lua](https://github.com/JamesWilko/Payday-2-BLT-Lua).
+The Lua component of the BLT which controls mod loading can be found in it's own repository, [Payday-2-BLT-Lua](https://github.com/ModWorkshop/Raid-BLT-Lua).
 
 ## Documentation
 Documentation for the BLT can be found on the [GitHub Wiki](https://github.com/JamesWilko/Payday-2-BLT/wiki) for the project.
@@ -11,7 +11,7 @@ Raid BLT requires the following dependencies, which are all statically linked.
 * OpenSSL
 * cURL
 * zlib
-* Detours
+* MinHook
 
 ### OpenSSL
 OpenSSL should be compiled as static libraries and the libraries placed in the lib directory, and the headers in the incl directory
@@ -23,8 +23,8 @@ cURL should be compiled as static, with the WITH_SSL parameter set to 'static' a
 zLib should be compiled as static.
 I had to add SAFESEH handling to the MASM objects in order for this to be compatible with Payday2-BLT
 
-### Detours
-A compiled version of detours is included, and all terms of the included Microsoft Research Shared Source License Agreement (detours_license.rtf) are applicable.
+### MinHook
+A compiled version of MinHook is included
 
 ## Contributors
 - Payday 2 BLT Team
