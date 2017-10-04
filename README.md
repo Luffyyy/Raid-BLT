@@ -51,4 +51,5 @@ A compiled version of MinHook is included
 	* Kilandor
 	* Joel Juvél
 	* PlayYou
+	* Snh20
 	* and others who haven't been added yet
