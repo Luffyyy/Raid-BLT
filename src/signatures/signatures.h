@@ -41,14 +41,16 @@ public:
 
 class FuncDetour {
 public:
-	FuncDetour(void** oldF, void* newF);
+	FuncDetour(void* oldF, void* newF);
 	~FuncDetour();
-	void Attach();
-	void Detach();
+	void* GetTrampoline();
 protected:
-	void** oldFunction;
+	void* oldFunction;
 	void* newFunction;
+	void* trampolineFunction;
 };
 
+bool InitializeMinHook();
+void UninitializeMinHook();
 
 #endif // __SIGNATURE_HEADER__

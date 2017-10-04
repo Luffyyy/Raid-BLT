@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <tlhelp32.h>
 #include <Psapi.h>
-#include <detours.h>
+#include <MinHook.h>
 
 #include "signatures.h"
 
@@ -17,19 +17,19 @@ MODULEINFO GetModuleInfo(std::string szModule)
 }
 
 
-unsigned long FindPattern(char* module, const char* funcname, const char* pattern, const char* mask)
+unsigned __int64 FindPattern(char* module, const char* funcname, const char* pattern, const char* mask)
 {
 	MODULEINFO mInfo = GetModuleInfo(module);
-	DWORD base = (DWORD)mInfo.lpBaseOfDll;
-	DWORD size = (DWORD)mInfo.SizeOfImage;
-	DWORD patternLength = (DWORD)strlen(mask);
-	for (DWORD i = 0; i < size - patternLength; i++){
+	DWORDLONG base = (DWORDLONG)mInfo.lpBaseOfDll;
+	DWORDLONG size = (DWORDLONG)mInfo.SizeOfImage;
+	DWORDLONG patternLength = (DWORDLONG)strlen(mask);
+	for (DWORDLONG i = 0; i < size - patternLength; i++){
 		bool found = true;
-		for (DWORD j = 0; j < patternLength; j++){
+		for (DWORDLONG j = 0; j < patternLength; j++){
 			found &= mask[j] == '?' || pattern[j] == *(char*)(base + i + j);
 		}
 		if (found) {
-//			printf("Found %s: 0x%p\n", funcname, base + i);
+			//			printf("Found %s: 0x%p\n", funcname, base + i);
 			return base + i;
 		}
 	}
@@ -53,23 +53,73 @@ void SignatureSearch::Search(){
 	printf("Scanning for signatures.\n");
 	std::vector<SignatureF>::iterator it;
 	for (it = allSignatures->begin(); it < allSignatures->end(); it++){
-		*((void**)it->address) = (void*)(FindPattern("payday2_win32_release.exe", it->funcname, it->signature, it->mask) + it->offset);
+		*((void**)it->address) = (void*)(FindPattern("raid_win64_d3d9_release.exe", it->funcname, it->signature, it->mask) + it->offset);
 	}
 }
 
 
-FuncDetour::FuncDetour(void** oldF, void* newF) : oldFunction(oldF), newFunction(newF){
-	//DetourRestoreAfterWith();
+FuncDetour::FuncDetour(void* oldF, void* newF) : oldFunction(oldF), newFunction(newF){
+	void* trampoline = nullptr;
 
-	DetourTransactionBegin();
-	DetourUpdateThread(GetCurrentThread());
-	DetourAttach(oldF, newF);
-	LONG result = DetourTransactionCommit();
+	MH_STATUS status = MH_CreateHook(oldF, newF, reinterpret_cast<void**>(&trampoline));
+	if (status != MH_OK){
+		// TODO: Proper error handling, not this sloppy crap
+		printf("Warning: MH_CreateHook(%p, %p, NULL) failed with error | %s\n", oldF, newF, MH_StatusToString(status));
+		return;
+	}
+
+	status = MH_EnableHook(oldF);
+	if (status != MH_OK){
+		// TODO: Proper error handling, not this sloppy crap
+		printf("Warning: MH_EnableHook(%p) failed with error | %s\n", oldF, MH_StatusToString(status));
+	}
+
+	trampolineFunction = trampoline;
 }
 
 FuncDetour::~FuncDetour(){
-	DetourTransactionBegin();
-	DetourUpdateThread(GetCurrentThread());
-	DetourDetach(oldFunction, newFunction);
-	LONG result = DetourTransactionCommit();
+	MH_STATUS status = MH_RemoveHook(oldFunction);
+	if (status != MH_OK){
+		// TODO: Proper error handling, not this sloppy crap
+		printf("Warning: MH_RemoveHook(%p) failed with error | %s\n", oldFunction, MH_StatusToString(status));
+		//		return;
+	}
+
+	oldFunction = nullptr;
+	newFunction = nullptr;
+	trampolineFunction = nullptr;
+}
+
+void* FuncDetour::GetTrampoline(){
+	return trampolineFunction;
+}
+
+static bool MinHookInitialized = false;
+
+bool InitializeMinHook(){
+	if (MinHookInitialized){
+		return true;
+	}
+
+	MH_STATUS status = MH_Initialize();
+	if (status != MH_OK){
+		printf("Error: MH_Initialize() failed with error | %s\n", MH_StatusToString(status));
+		return false;
+	}
+
+	MinHookInitialized = true;
+	return true;
+}
+
+void UninitializeMinHook(){
+	if (!MinHookInitialized){
+		return;
+	}
+
+	MH_STATUS status = MH_Uninitialize();
+	if (status != MH_OK){
+		printf("Error: MH_Uninitialize() failed with error | %s\n", MH_StatusToString(status));
+		return;
+	}
+	MinHookInitialized = false;
 }
