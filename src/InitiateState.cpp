@@ -92,7 +92,8 @@ namespace pd2hook
 	CREATE_NORMAL_CALLABLE_SIGNATURE(lua_type, int, "\x48\x83\xEC\x28\x4C\x8B\xD1\xE8\x00\x00\x00\x00\x48\x8B\x08\x4C", "xxxxxxxx????xxxx", 0, lua_State*, int);
 	CREATE_NORMAL_CALLABLE_SIGNATURE(lua_typename, const char*, "\x48\x8D\x00\x00\x00\x00\x00\x48\x63\xC2\x48\x8B\x04\xC1\xC3\xCC", "xx?????xxxxxxxxx", 0, lua_State*, int);
 	CREATE_NORMAL_CALLABLE_SIGNATURE(luaL_unref, void, "\x45\x85\xC0\x0F\x88\x00\x00\x00\x00\x48\x89\x5C\x24\x08\x48\x89", "xxxxx????xxxxxxx", 0, lua_State*, int, int);
-	CREATE_CALLABLE_CLASS_SIGNATURE(do_game_update, void*, "\x56\xFF\x74\x24\x0C\x8B\xF1\x68\x00\x00\x00\x00\xFF\x36\xE8", "xxxxxxxx????xxx", 0, int*, int*)
+	// Replacing the now-extensively-inlined do_game_update() hook with one applied on Application::update() instead
+	CREATE_CALLABLE_CLASS_SIGNATURE(application_update, void*, "\x48\x83\xEC\x28\x8B\x05\x00\x00\x00\x00\xA8\x01\x0F\x85", "xxxxxx????xxxx", 0)
 		// Possibly dsl::LuaInterface::newstate() rather than luaL_newstate()
 		CREATE_CALLABLE_CLASS_SIGNATURE(luaL_newstate, int, "\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x57\x48\x83\xEC\x20\x41\x0F\xB6\xF8\x0F\xB6\xF2\x48\x8B", "xxxxxxxxxxxxxxxxxxxxxxxx", 0, char, char, int)
 
@@ -914,7 +915,7 @@ namespace pd2hook
 	int updates = 0;
 	std::thread::id main_thread_id;
 
-	void* __fastcall do_game_update_new(void* thislol, int edx, int* a, int* b)
+	void* application_update_new(void* thisptr)
 	{
 
 		// If someone has a better way of doing this, I'd like to know about it.
@@ -922,10 +923,9 @@ namespace pd2hook
 		// I'll check if it's even different at all later.
 		if (std::this_thread::get_id() != main_thread_id)
 		{
-			return do_game_update(thislol, a, b);
+			return application_update(thisptr);
 		}
 
-		lua_State* L = (lua_State*)*((void**)thislol);
 		if (updates == 0)
 		{
 			HTTPManager::GetSingleton()->init_locks();
@@ -937,7 +937,7 @@ namespace pd2hook
 		}
 
 		updates++;
-		return do_game_update(thislol, a, b);
+		return application_update(thisptr);
 	}
 
 	// Random dude who wrote what's his face?
@@ -1036,16 +1036,8 @@ namespace pd2hook
 
 		SignatureSearch::Search();
 
-		// Snh20: do_game_update() is extensively inlined so I haven't been able to locate a single independent instance, disabling for now
-		//	gameUpdateDetour = new FuncDetour(do_game_update, do_game_update_new);
-		// Snh20: This looks crazy, I know, but hear me out - MinHook differs from Microsoft Research Detours in that the detoured
-		// function must not be called again at the same address (otherwise Very Bad Things(TM) will happen) since the detour would
-		// be recursively calling back to itself. But that's exactly what the trampoline is for - it is used as a way to bypass said
-		// detour and call directly into the original function, so clobber the address of the original function (which is now stored
-		// in the FuncDetour instance anyway) with the address of the trampoline so the rest of the code does not need to be changed
-		// just to account for this difference. Since the FuncDetour instances will only ever be deleted at shutdown, there should
-		// not be any issue with dangling pointers
-		//	do_game_update = reinterpret_cast<do_game_updateptr>(gameUpdateDetour->GetTrampoline());
+		gameUpdateDetour = new FuncDetour(application_update, application_update_new);
+		application_update = reinterpret_cast<application_updateptr>(gameUpdateDetour->GetTrampoline());
 
 		newStateDetour = new FuncDetour(luaL_newstate, luaL_newstate_new);
 		luaL_newstate = reinterpret_cast<luaL_newstateptr>(newStateDetour->GetTrampoline());
