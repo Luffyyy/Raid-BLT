@@ -26,8 +26,11 @@ const char *IOException::exceptionName() const
 	return "An IOException";
 }
 
-	vector<string> GetDirectoryContents(const std::string& path, bool dirs){
+	vector<string> GetDirectoryContents(const std::string& path, bool dirs){			
 		vector<string> files;
+
+		if (!DirectoryExists(path)) return files;
+
 		WIN32_FIND_DATA ffd;
 		TCHAR szDir[MAX_PATH];
 		TCHAR *fPath = (TCHAR*)path.c_str();
