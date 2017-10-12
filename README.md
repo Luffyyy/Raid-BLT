@@ -1,5 +1,5 @@
 # Raid BLT
-An open source Lua hook for Raid, designed and created for ease of use for both players and modders.  
+An open source Lua hook for Raid that is a fork of the payday 2 BLT hook, designed and created for ease of use for both players and modders.  
 This is the developer repository.
 The Lua component of the BLT which controls mod loading can be found in it's own repository, [Raid-BLT-Lua](https://github.com/ModWorkshop/Raid-BLT-Lua).
 
