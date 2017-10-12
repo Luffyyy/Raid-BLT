@@ -1,10 +1,13 @@
 # Raid BLT
 An open source Lua hook for Raid, designed and created for ease of use for both players and modders.  
 This is the developer repository.
-The Lua component of the BLT which controls mod loading can be found in it's own repository, [Payday-2-BLT-Lua](https://github.com/ModWorkshop/Raid-BLT-Lua).
+The Lua component of the BLT which controls mod loading can be found in it's own repository, [Raid-BLT-Lua](https://github.com/ModWorkshop/Raid-BLT-Lua).
+
+## Download
+Visit [ModWorkshop](https://modworkshop.net/mydownloads.php?action=view_down&did=21065) to get the latest stable download. 
 
 ## Documentation
-Documentation for the BLT can be found on the [GitHub Wiki](https://github.com/JamesWilko/Payday-2-BLT/wiki) for the project.
+Documentation for the BLT can be found on the [GitHub Wiki](https://github.com/JamesWilko/Raid-BLT/wiki) for the project.
 
 ## Dependencies
 Raid BLT requires the following dependencies, which are all statically linked.
