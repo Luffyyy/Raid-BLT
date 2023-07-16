@@ -7,22 +7,22 @@
 
 namespace
 {
-class outbuf : public std::streambuf
-{
-public:
-	outbuf()
+	class outbuf : public std::streambuf
 	{
-		setp(0, 0);
-	}
+	public:
+		outbuf()
+		{
+			setp(0, 0);
+		}
 
-	virtual int_type overflow(int_type c = traits_type::eof()) override
-	{
-		return fputc(c, stdout) == EOF ? traits_type::eof() : c;
-	}
-};
+		virtual int_type overflow(int_type c = traits_type::eof()) override
+		{
+			return fputc(c, stdout) == EOF ? traits_type::eof() : c;
+		}
+	};
 
-outbuf obuf;
-std::streambuf *sb = nullptr;
+	outbuf obuf;
+	std::streambuf *sb = nullptr;
 }
 static BOOL WINAPI MyConsoleCtrlHandler(DWORD dwCtrlEvent) { return dwCtrlEvent == CTRL_C_EVENT; }
 
@@ -33,6 +33,10 @@ CConsole::CConsole() : m_OwnConsole(false) {
 	RemoveMenu(GetSystemMenu(GetConsoleWindow(), FALSE), SC_CLOSE, MF_BYCOMMAND);
 	const int in = _open_osfhandle(INT_PTR(GetStdHandle(STD_INPUT_HANDLE)), _O_TEXT);
 	const int out = _open_osfhandle(INT_PTR(GetStdHandle(STD_OUTPUT_HANDLE)), _O_TEXT);
+	
+	freopen("CONOUT$", "w", stdout); // start crash fix
+	freopen("CONIN$", "r", stdin); // start crash fix
+
 	m_OldStdin = *stdin;
 	m_OldStdout = *stdout;
 
@@ -47,11 +51,12 @@ CConsole::CConsole() : m_OwnConsole(false) {
 
 CConsole::~CConsole() {
 	if (m_OwnConsole) {
-		std::cout.rdbuf(sb);
+		//std::cout.rdbuf(sb); // removed for exit crash fix
 		fclose(stdout);
 		fclose(stdin);
 		*stdout = m_OldStdout;
 		*stdin = m_OldStdin;
+		std::ios::sync_with_stdio(); // exit crash fix
 		SetConsoleCtrlHandler(MyConsoleCtrlHandler, FALSE);
 		FreeConsole();
 	}

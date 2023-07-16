@@ -23,6 +23,8 @@ struct HTTPProgressNotification{
 };
 }
 
+static HTTPManager* s_httpSingleton = nullptr; // exit crash fix
+
 using HTTPProgressNotificationPtr = std::unique_ptr<HTTPProgressNotification>;
 using HTTPItemPtr = std::unique_ptr<HTTPItem>;
 PD2HOOK_REGISTER_EVENTQUEUE(HTTPProgressNotificationPtr, HTTPProgressNotification)
@@ -59,8 +61,22 @@ void HTTPManager::init_locks(){
 }
 
 HTTPManager* HTTPManager::GetSingleton(){
-	static HTTPManager httpSingleton;
-	return &httpSingleton;
+
+	// exit crash fix
+	if (s_httpSingleton == nullptr)
+		s_httpSingleton = new HTTPManager();
+
+	return s_httpSingleton;
+}
+
+// exit crash fix
+void HTTPManager::Destroy()
+{
+	if (s_httpSingleton != nullptr)
+	{
+		delete s_httpSingleton;
+		s_httpSingleton = nullptr;
+	}
 }
 
 void HTTPManager::SSL_Lock(int lockno){

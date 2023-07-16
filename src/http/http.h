@@ -33,6 +33,7 @@ public:
 	void init_locks();
 
 	static HTTPManager* GetSingleton();
+	static void Destroy(); // exit crash fix
 
 	void SSL_Lock(int lockno);
 	void SSL_Unlock(int lockno);

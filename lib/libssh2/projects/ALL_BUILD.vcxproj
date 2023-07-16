@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C1AB8BA6-B1B2-3C4E-8126-E7914B326C99}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="A:\Development\Repos\Raid-BLT\lib\libssh2\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule A:/Development/Repos/Raid-BLT/lib/libssh2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+A:\Programme\CMake\bin\cmake.exe -SA:/Development/Repos/Raid-BLT/lib/libssh2 -BA:/Development/Repos/Raid-BLT/lib/libssh2/projects --check-stamp-file A:/Development/Repos/Raid-BLT/lib/libssh2/projects/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">A:/Development/Repos/Raid-BLT/lib/libssh2/CMakeLists.txt;A:\Development\Repos\Raid-BLT\lib\libssh2\CMakeLists.txt;A:\Development\Repos\Raid-BLT\lib\libssh2\cmake\max_warnings.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\3.13.4\CMakeCCompiler.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\3.13.4\CMakeRCCompiler.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\3.13.4\CMakeSystem.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\feature_tests.c;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCCompiler.cmake.in;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCCompilerABI.c;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCommonLanguageInclude.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCompilerIdDetection.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompileFeatures.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompilerABI.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompilerId.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineRCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineSystem.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeFindBinUtils.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeGenericSystem.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeInitializeConfigs.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeLanguageInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeParseArguments.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeParseImplicitLinkInfo.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeRCCompiler.cmake.in;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeRCInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeSystem.cmake.in;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInitialize.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeTestCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeTestCompilerCommon.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeTestRCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CPack.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CPackComponent.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\ADSP-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\ARMCC-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\AppleClang-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Borland-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Clang-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Cray-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\GHS-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\GNU-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\HP-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\IAR-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Intel-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MSVC-C-FeatureTests.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MSVC-C.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MSVC-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\PGI-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\PathScale-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\SCO-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\TI-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Watcom-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\XL-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\zOS-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CompilerId\VS-10.vcxproj.in;A:\Programme\CMake\share\cmake-3.13\Modules\FeatureSummary.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\GNUInstallDirs.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Internal\FeatureTesting.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-C.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\Windows.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\WindowsPaths.cmake;A:\Programme\CMake\share\cmake-3.13\Templates\CPackConfig.cmake.in;A:\Development\Repos\Raid-BLT\lib\libssh2\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule A:/Development/Repos/Raid-BLT/lib/libssh2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+A:\Programme\CMake\bin\cmake.exe -SA:/Development/Repos/Raid-BLT/lib/libssh2 -BA:/Development/Repos/Raid-BLT/lib/libssh2/projects --check-stamp-file A:/Development/Repos/Raid-BLT/lib/libssh2/projects/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">A:/Development/Repos/Raid-BLT/lib/libssh2/CMakeLists.txt;A:\Development\Repos\Raid-BLT\lib\libssh2\CMakeLists.txt;A:\Development\Repos\Raid-BLT\lib\libssh2\cmake\max_warnings.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\3.13.4\CMakeCCompiler.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\3.13.4\CMakeRCCompiler.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\3.13.4\CMakeSystem.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\feature_tests.c;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCCompiler.cmake.in;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCCompilerABI.c;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCommonLanguageInclude.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCompilerIdDetection.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompileFeatures.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompilerABI.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompilerId.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineRCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineSystem.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeFindBinUtils.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeGenericSystem.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeInitializeConfigs.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeLanguageInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeParseArguments.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeParseImplicitLinkInfo.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeRCCompiler.cmake.in;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeRCInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeSystem.cmake.in;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInitialize.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeTestCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeTestCompilerCommon.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeTestRCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CPack.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CPackComponent.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\ADSP-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\ARMCC-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\AppleClang-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Borland-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Clang-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Cray-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\GHS-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\GNU-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\HP-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\IAR-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Intel-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MSVC-C-FeatureTests.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MSVC-C.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MSVC-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\PGI-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\PathScale-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\SCO-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\TI-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Watcom-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\XL-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\zOS-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CompilerId\VS-10.vcxproj.in;A:\Programme\CMake\share\cmake-3.13\Modules\FeatureSummary.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\GNUInstallDirs.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Internal\FeatureTesting.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-C.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\Windows.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\WindowsPaths.cmake;A:\Programme\CMake\share\cmake-3.13\Templates\CPackConfig.cmake.in;A:\Development\Repos\Raid-BLT\lib\libssh2\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule A:/Development/Repos/Raid-BLT/lib/libssh2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+A:\Programme\CMake\bin\cmake.exe -SA:/Development/Repos/Raid-BLT/lib/libssh2 -BA:/Development/Repos/Raid-BLT/lib/libssh2/projects --check-stamp-file A:/Development/Repos/Raid-BLT/lib/libssh2/projects/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">A:/Development/Repos/Raid-BLT/lib/libssh2/CMakeLists.txt;A:\Development\Repos\Raid-BLT\lib\libssh2\CMakeLists.txt;A:\Development\Repos\Raid-BLT\lib\libssh2\cmake\max_warnings.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\3.13.4\CMakeCCompiler.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\3.13.4\CMakeRCCompiler.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\3.13.4\CMakeSystem.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\feature_tests.c;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCCompiler.cmake.in;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCCompilerABI.c;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCommonLanguageInclude.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCompilerIdDetection.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompileFeatures.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompilerABI.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompilerId.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineRCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineSystem.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeFindBinUtils.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeGenericSystem.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeInitializeConfigs.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeLanguageInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeParseArguments.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeParseImplicitLinkInfo.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeRCCompiler.cmake.in;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeRCInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeSystem.cmake.in;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInitialize.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeTestCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeTestCompilerCommon.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeTestRCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CPack.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CPackComponent.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\ADSP-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\ARMCC-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\AppleClang-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Borland-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Clang-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Cray-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\GHS-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\GNU-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\HP-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\IAR-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Intel-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MSVC-C-FeatureTests.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MSVC-C.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MSVC-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\PGI-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\PathScale-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\SCO-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\TI-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Watcom-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\XL-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\zOS-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CompilerId\VS-10.vcxproj.in;A:\Programme\CMake\share\cmake-3.13\Modules\FeatureSummary.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\GNUInstallDirs.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Internal\FeatureTesting.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-C.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\Windows.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\WindowsPaths.cmake;A:\Programme\CMake\share\cmake-3.13\Templates\CPackConfig.cmake.in;A:\Development\Repos\Raid-BLT\lib\libssh2\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule A:/Development/Repos/Raid-BLT/lib/libssh2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+A:\Programme\CMake\bin\cmake.exe -SA:/Development/Repos/Raid-BLT/lib/libssh2 -BA:/Development/Repos/Raid-BLT/lib/libssh2/projects --check-stamp-file A:/Development/Repos/Raid-BLT/lib/libssh2/projects/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">A:/Development/Repos/Raid-BLT/lib/libssh2/CMakeLists.txt;A:\Development\Repos\Raid-BLT\lib\libssh2\CMakeLists.txt;A:\Development\Repos\Raid-BLT\lib\libssh2\cmake\max_warnings.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\3.13.4\CMakeCCompiler.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\3.13.4\CMakeRCCompiler.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\3.13.4\CMakeSystem.cmake;A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\feature_tests.c;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCCompiler.cmake.in;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCCompilerABI.c;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCommonLanguageInclude.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeCompilerIdDetection.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompileFeatures.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompilerABI.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineCompilerId.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineRCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeDetermineSystem.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeFindBinUtils.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeGenericSystem.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeInitializeConfigs.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeLanguageInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeParseArguments.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeParseImplicitLinkInfo.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeRCCompiler.cmake.in;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeRCInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeSystem.cmake.in;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInformation.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeSystemSpecificInitialize.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeTestCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeTestCompilerCommon.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CMakeTestRCCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CPack.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CPackComponent.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\ADSP-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\ARMCC-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\AppleClang-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Borland-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Clang-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Cray-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\GHS-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\GNU-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\HP-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\IAR-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Intel-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MSVC-C-FeatureTests.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MSVC-C.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\MSVC-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\PGI-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\PathScale-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\SCO-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\TI-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\Watcom-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\XL-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Compiler\zOS-C-DetermineCompiler.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\CompilerId\VS-10.vcxproj.in;A:\Programme\CMake\share\cmake-3.13\Modules\FeatureSummary.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\GNUInstallDirs.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Internal\FeatureTesting.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC-C.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\Windows-MSVC.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\Windows.cmake;A:\Programme\CMake\share\cmake-3.13\Modules\Platform\WindowsPaths.cmake;A:\Programme\CMake\share\cmake-3.13\Templates\CPackConfig.cmake.in;A:\Development\Repos\Raid-BLT\lib\libssh2\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">A:\Development\Repos\Raid-BLT\lib\libssh2\projects\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\ZERO_CHECK.vcxproj">
+      <Project>{450FFEE8-456A-3367-9320-B48F2D61A1D7}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-direct_tcpip.vcxproj">
+      <Project>{30D51D57-40F7-30E3-BF68-C150F566A6FE}</Project>
+      <Name>example-direct_tcpip</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-scp.vcxproj">
+      <Project>{A3C3E804-6F7A-3C8A-9D98-52AC37F4DCF1}</Project>
+      <Name>example-scp</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-scp_nonblock.vcxproj">
+      <Project>{7E597B39-2C9C-33B5-8264-B88D8E17C7FD}</Project>
+      <Name>example-scp_nonblock</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-scp_write.vcxproj">
+      <Project>{C1EB488C-A4A3-355A-8A02-BE29D97B0BC3}</Project>
+      <Name>example-scp_write</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-scp_write_nonblock.vcxproj">
+      <Project>{3ADD9990-A2F0-3E2C-8EEE-9DF546FB9834}</Project>
+      <Name>example-scp_write_nonblock</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-sftp.vcxproj">
+      <Project>{65139A7B-C11C-3E81-9F76-4877256A4539}</Project>
+      <Name>example-sftp</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-sftp_RW_nonblock.vcxproj">
+      <Project>{EB364296-E21E-3875-A4FF-AFF0C9992085}</Project>
+      <Name>example-sftp_RW_nonblock</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-sftp_append.vcxproj">
+      <Project>{9839DE6E-4D8D-332B-AE98-2F79AAB5943A}</Project>
+      <Name>example-sftp_append</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-sftp_mkdir.vcxproj">
+      <Project>{32F67C94-C53B-3DCA-A5E8-B61BD7BEECBF}</Project>
+      <Name>example-sftp_mkdir</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-sftp_mkdir_nonblock.vcxproj">
+      <Project>{5B6F0F18-7860-372F-B5F9-27DC116CC6A5}</Project>
+      <Name>example-sftp_mkdir_nonblock</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-sftp_nonblock.vcxproj">
+      <Project>{BDC7AA80-E82C-3F4D-8501-5BE159B16405}</Project>
+      <Name>example-sftp_nonblock</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-sftp_write.vcxproj">
+      <Project>{8D221C6D-6056-307A-A892-62B888A3CFB0}</Project>
+      <Name>example-sftp_write</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-sftp_write_nonblock.vcxproj">
+      <Project>{BA89179B-20C9-38F8-8E2D-069F1DF2F877}</Project>
+      <Name>example-sftp_write_nonblock</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-sftp_write_sliding.vcxproj">
+      <Project>{86E34FB3-CCA6-3E40-9E89-8A08CA7ED20F}</Project>
+      <Name>example-sftp_write_sliding</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-sftpdir.vcxproj">
+      <Project>{9C430BBD-25CF-35EE-B1EE-F56672FEBC44}</Project>
+      <Name>example-sftpdir</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-sftpdir_nonblock.vcxproj">
+      <Project>{3058B985-F708-3D33-970C-16311F17925F}</Project>
+      <Name>example-sftpdir_nonblock</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-ssh2.vcxproj">
+      <Project>{E3F68F6F-5AD2-3CB7-9B6F-E4A0D2F09302}</Project>
+      <Name>example-ssh2</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-ssh2_agent.vcxproj">
+      <Project>{715262FB-0996-3E61-A7AF-16C52CE83F35}</Project>
+      <Name>example-ssh2_agent</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-ssh2_echo.vcxproj">
+      <Project>{EAD67A14-4110-3CA9-9E63-FDE161AFFD84}</Project>
+      <Name>example-ssh2_echo</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-ssh2_exec.vcxproj">
+      <Project>{90AD70E2-4F40-3F5F-992D-093FE6275BA8}</Project>
+      <Name>example-ssh2_exec</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-subsystem_netconf.vcxproj">
+      <Project>{A7F31DF2-9A65-3CCD-A62D-DF53E63AF8ED}</Project>
+      <Name>example-subsystem_netconf</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\example\example-tcpip-forward.vcxproj">
+      <Project>{4E90E6BB-E5A5-312B-99C5-0AD9BB8A91B6}</Project>
+      <Name>example-tcpip-forward</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\src\libssh2.vcxproj">
+      <Project>{1F8BEC10-1F02-3EC6-A421-7460CEFA614C}</Project>
+      <Name>libssh2</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\tests\openssh_fixture.vcxproj">
+      <Project>{36016603-C929-3CA9-A8DF-9C27F77D7778}</Project>
+      <Name>openssh_fixture</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\tests\runner.vcxproj">
+      <Project>{F7FA12AC-B222-35A8-AA61-9F5211BF4111}</Project>
+      <Name>runner</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\tests\session_fixture.vcxproj">
+      <Project>{B68AFC9F-3A2F-346D-A5B4-CEAABABF74E8}</Project>
+      <Name>session_fixture</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\tests\test_hostkey.vcxproj">
+      <Project>{D129D898-B1D6-337A-A5A8-3694AC0E4EC3}</Project>
+      <Name>test_hostkey</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\tests\test_hostkey_hash.vcxproj">
+      <Project>{AD3C3F69-FE40-34D6-A876-5D1796D061B1}</Project>
+      <Name>test_hostkey_hash</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\tests\test_keyboard_interactive_auth_fails_with_wrong_response.vcxproj">
+      <Project>{FC000A9F-063B-3B99-ACDC-2E9C2B775E02}</Project>
+      <Name>test_keyboard_interactive_auth_fails_with_wrong_response</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\tests\test_keyboard_interactive_auth_succeeds_with_correct_response.vcxproj">
+      <Project>{50D8F555-75E3-3485-B2E9-D0BCC929AE7C}</Project>
+      <Name>test_keyboard_interactive_auth_succeeds_with_correct_response</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\tests\test_password_auth_fails_with_wrong_password.vcxproj">
+      <Project>{7BEF5604-8BD4-3AE6-9D68-6AAD9E7F9BFD}</Project>
+      <Name>test_password_auth_fails_with_wrong_password</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\tests\test_password_auth_fails_with_wrong_username.vcxproj">
+      <Project>{DA4C52D6-77B0-3F14-A3EE-DCF0D34139D1}</Project>
+      <Name>test_password_auth_fails_with_wrong_username</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\tests\test_password_auth_succeeds_with_correct_credentials.vcxproj">
+      <Project>{979E28E8-05C0-370C-827A-7133CE0B0E11}</Project>
+      <Name>test_password_auth_succeeds_with_correct_credentials</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\tests\test_public_key_auth_fails_with_wrong_key.vcxproj">
+      <Project>{F085FEC3-EED3-3050-B19E-B672575BD126}</Project>
+      <Name>test_public_key_auth_fails_with_wrong_key</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\tests\test_public_key_auth_succeeds_with_correct_dsa_key.vcxproj">
+      <Project>{18C4597D-4FF1-379E-A0D0-911742FDC9C3}</Project>
+      <Name>test_public_key_auth_succeeds_with_correct_dsa_key</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\tests\test_public_key_auth_succeeds_with_correct_encrypted_rsa_key.vcxproj">
+      <Project>{2A86E479-89E7-3B58-83CF-29B72804B58A}</Project>
+      <Name>test_public_key_auth_succeeds_with_correct_encrypted_rsa_key</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="A:\Development\Repos\Raid-BLT\lib\libssh2\projects\tests\test_public_key_auth_succeeds_with_correct_rsa_key.vcxproj">
+      <Project>{9BBF8322-3F41-3845-B664-3F0FB5158353}</Project>
+      <Name>test_public_key_auth_succeeds_with_correct_rsa_key</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

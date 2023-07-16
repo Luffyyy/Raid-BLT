@@ -53,7 +53,7 @@ void SignatureSearch::Search(){
 	printf("Scanning for signatures.\n");
 	std::vector<SignatureF>::iterator it;
 	for (it = allSignatures->begin(); it < allSignatures->end(); it++){
-		*((void**)it->address) = (void*)(FindPattern("raid_win64_d3d9_release.exe", it->funcname, it->signature, it->mask) + it->offset);
+		*((void**)it->address) = (void*)(FindPattern("raid_win64_release.exe", it->funcname, it->signature, it->mask) + it->offset);
 	}
 }
 

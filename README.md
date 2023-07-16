@@ -7,7 +7,7 @@ The Lua component of the BLT which controls mod loading can be found in it's own
 Visit [ModWorkshop](https://modworkshop.net/mydownloads.php?action=view_down&did=21065) to get the latest stable download. 
 
 ## Documentation
-Documentation for the BLT can be found on the [GitHub Wiki](https://github.com/JamesWilko/Raid-BLT/wiki) for the project.
+Documentation for the BLT can be found on the [GitHub Wiki](https://github.com/ModWorkShop/Raid-BLT/wiki) for the project.
 
 ## Dependencies
 Raid BLT requires the following dependencies, which are all statically linked.
@@ -41,6 +41,7 @@ A compiled version of MinHook is included
 	* Dougley
 	* awcjack
 	* BangL
+	* Cryfact
 	* chromKa
 	* xDarkWolf
 	* Luffyyy
