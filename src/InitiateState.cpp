@@ -75,7 +75,7 @@ namespace pd2hook
 	//CREATE_CALLABLE_SIGNATURE(lua_pushnumber, void, "\x8B\x44\x24\x04\x8B\x48\x08\xF3\x0F\x10\x44\x24\x08", "xxxxxxxxxxxxx", 0, lua_State*, double)
 	CREATE_NORMAL_CALLABLE_SIGNATURE(lua_pushinteger, void, "\x48\x8B\x41\x28\x0F\x57\xC0\xF2\x48\x0F\x2A\xC2\xF2\x0F\x11\x00", "xxxxxxxxxxxxxxxx", 0, lua_State*, ptrdiff_t)
 	CREATE_NORMAL_CALLABLE_SIGNATURE(lua_pushboolean, void, "\x48\x8B\x41\x28\x45\x33\xC0\x85\xD2\x41\x0F\x95\xC0\x49\xFF\xC0", "xxxxxxxxxxxxxxxx", 0, lua_State*, bool)
-	CREATE_NORMAL_CALLABLE_SIGNATURE(lua_pushcclosure, void, "\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x57\x48\x83\xEC\x20\x4C\x8B\x49\x10\x48\x8B\xF2\x49\x63\xF8\x48\x8B\xD9\x49\x8B\x41\x28", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 0, lua_State*, lua_CFunction, int)
+	CREATE_NORMAL_CALLABLE_SIGNATURE(lua_pushcclosure, void, "\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x57\x48\x83\xEC\x20\x4C\x8B\x49\x10\x48\x8B\xF2\x49\x63\xF8\x48\x8B\xD9\x49\x8B\x41\x28", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 0, lua_State*, lua_CFunction, int);
 	// lua_pushstring()'s signature was found before lua_pushlstring()'s, so I'm leaving it here now since it's valid anyway
 	// It was used as a quick and dirty - and broken - workaround since most lua_pushlstring() calls are inlined, but it ended up
 	// breaking HTTP downloads of zip archives due to its sensitivity to premature null characters
@@ -96,7 +96,21 @@ namespace pd2hook
 	// Possibly dsl::LuaInterface::newstate() rather than luaL_newstate()
 	CREATE_CALLABLE_CLASS_SIGNATURE(luaL_newstate, int, "\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x57\x48\x83\xEC\x20\x41\x0F\xB6\xF8\x0F\xB6\xF2\x48\x8B", "xxxxxxxxxxxxxxxxxxxxxxxx", 0, char, char, int)
 
-// lua c-functions
+	// optional for logging
+	CREATE_CALLABLE_CLASS_SIGNATURE(lua_app_debug, int, "\x48\x89\x5C\x24\x08\x57\x48\x83\xEC\x30\xBA\x01\x00\x00\x00\x48\x8B\xF9\xE8\x00\x00\x00\x00\x33\xDB\x48\x63\x08\x83\xF9\xFF\x74\x00\x48\x8B\x05\xB8\x18\x67\x00", "xxxxxxxxxxxxxxxxxxx????xxxxxxxxx?xxxxxxx", 0, lua_State*)
+	CREATE_CALLABLE_CLASS_SIGNATURE(lua_app_trace, int, "\x48\x89\x5C\x24\x08\x57\x48\x83\xEC\x30\xBA\x01\x00\x00\x00\x48\x8B\xF9\xE8\x00\x00\x00\x00\x33\xDB\x48\x63\x08\x83\xF9\xFF\x74\x00\x48\x8B\x05\x58\x19\x67\x00", "xxxxxxxxxxxxxxxxxxx????xxxxxxxxx?xxxxxxx", 0, lua_State*)
+	CREATE_CALLABLE_CLASS_SIGNATURE(lua_app_info, int, "\x48\x89\x5C\x24\x08\x57\x48\x83\xEC\x30\xBA\x01\x00\x00\x00\x48\x8B\xF9\xE8\x00\x00\x00\x00\x33\xDB\x48\x63\x08\x83\xF9\xFF\x74\x00\x48\x8B\x05\xF8\x19\x67\x00", "xxxxxxxxxxxxxxxxxxx????xxxxxxxxx?xxxxxxx", 0, lua_State*)
+	CREATE_CALLABLE_CLASS_SIGNATURE(lua_app_warn, int, "\x48\x89\x5C\x24\x08\x57\x48\x83\xEC\x30\xBA\x01\x00\x00\x00\x48\x8B\xF9\xE8\x00\x00\x00\x00\x33\xDB\x48\x63\x08\x83\xF9\xFF\x74\x00\x48\x8B\x05\x98\x1A\x67\x00", "xxxxxxxxxxxxxxxxxxx????xxxxxxxxx?xxxxxxx", 0, lua_State*)
+	CREATE_CALLABLE_CLASS_SIGNATURE(lua_app_error, int, "\x48\x89\x5C\x24\x08\x57\x48\x83\xEC\x30\xBA\x01\x00\x00\x00\x48\x8B\xF9\xE8\x00\x00\x00\x00\x33\xDB\x48\x63\x08\x83\xF9\xFF\x74\x00\x48\x8B\x05\x38\x1B\x67\x00", "xxxxxxxxxxxxxxxxxxx????xxxxxxxxx?xxxxxxx", 0, lua_State*)
+
+	CREATE_CALLABLE_CLASS_SIGNATURE(lua_app_error_no_stack, int, "\x48\x89\x5C\x24\x08\x57\x48\x83\xEC\x30\xBA\x01\x00\x00\x00\x48\x8B\xF9\xE8\x00\x00\x00\x00\x33\xDB\x48\x63\x08\x83\xF9\xFF\x74\x00\x48\x8B\x05\xD8\x1B\x67\x00", "xxxxxxxxxxxxxxxxxxx????xxxxxxxxx?xxxxxxx", 0, lua_State*)
+	CREATE_CALLABLE_CLASS_SIGNATURE(lua_app_push_debug_scope, int, "\x48\x89\x5C\x24\x08\x57\x48\x83\xEC\x20\xBA\x01\x00\x00\x00\x48\x8B\xF9\xE8\x00\x00\x00\x00\x33\xDB\x48\x63\x10\x83\xFA\xFF\x74\x00\x48\x8B\x05\x68\x1C\x67\x00", "xxxxxxxxxxxxxxxxxxx????xxxxxxxxx?xxxxxxx", 0, lua_State*)
+	CREATE_CALLABLE_CLASS_SIGNATURE(lua_app_pop_debug_scope, int, "\x48\x83\xEC\x28\xBA\x01\x00\x00\x00\xE8\x00\x00\x00\x00\x45\x33\xC0\x48\x63\x08\x83\xF9\xFF\x74\x00\x48\x8B\x05\xE0\x1C\x67\x00\x48\x8D\x14\x49\x48\x8B\x48\x10", "xxxxxxxxxx????xxxxxxxxxx?xxxxxxxxxxxxxxx", 0, lua_State*)
+	CREATE_CALLABLE_CLASS_SIGNATURE(lua_app_debug_stats_prev, int, "\x48\x83\xEC\x28\xBA\x01\x00\x00\x00\xE8\x00\x00\x00\x00\x45\x33\xC0\x48\x63\x08\x83\xF9\xFF\x74\x00\x48\x8B\x05\x50\x1D\x67\x00\x48\x8D\x14\x49\x48\x8B\x48\x10", "xxxxxxxxxx????xxxxxxxxxx?xxxxxxxxxxxxxxx", 0, lua_State*)
+	CREATE_CALLABLE_CLASS_SIGNATURE(lua_app_debug_stats_next, int, "\x48\x83\xEC\x28\xBA\x01\x00\x00\x00\xE8\x00\x00\x00\x00\x45\x33\xC0\x48\x63\x08\x83\xF9\xFF\x74\x00\x48\x8B\x05\xC0\x1D\x67\x00\x48\x8D\x14\x49\x48\x8B\x48\x10", "xxxxxxxxxx????xxxxxxxxxx?xxxxxxxxxxxxxxx", 0, lua_State*)
+
+
+		// lua c-functions
 
 // From src/lua.h
 // Pseudo-indices
@@ -573,6 +587,108 @@ namespace pd2hook
 	int updates = 0;
 	std::thread::id main_thread_id;
 
+	int lua_application_debug(lua_State* L)
+	{
+		std::string strMessage = "LUA DEBUG: ";
+		strMessage += lua_tostring(L, 2);
+
+		PD2HOOK_LOG_LUA_DEBUG(strMessage.c_str());
+
+		return 0;
+	}
+
+	int lua_application_trace(lua_State* L)
+	{
+		std::string strMessage = "LUA TRACE: ";
+		strMessage += lua_tostring(L, 2);
+
+		PD2HOOK_LOG_LUA_TRACE(strMessage.c_str());
+
+		return 0;
+	}
+
+	int lua_application_info(lua_State* L)
+	{
+		std::string strMessage = "LUA INFO: ";
+		strMessage += lua_tostring(L, 2);
+
+		PD2HOOK_LOG_LUA_INFO(strMessage.c_str());
+
+		return 0;
+	}
+
+	int lua_application_warn(lua_State* L)
+	{
+		std::string strMessage = "LUA WARN: ";
+		strMessage += lua_tostring(L, 2);
+
+		PD2HOOK_LOG_LUA_WARN(strMessage.c_str());
+
+		return 0;
+	}
+
+	int lua_application_error(lua_State* L)
+	{
+		std::string strMessage = "LUA ERROR: ";
+		strMessage += lua_tostring(L, 2);
+
+		PD2HOOK_LOG_LUA_ERROR(strMessage.c_str());
+
+		return 0;
+	}
+
+	int lua_application_error_no_stack(lua_State* L)
+	{
+		std::string strMessage = "LUA ERROR NO STACK: ";
+		strMessage += lua_tostring(L, 2);
+
+		PD2HOOK_LOG_LUA_ERROR(strMessage.c_str());
+
+		return 0;
+	}
+
+
+	int lua_application_push_debug_scope(lua_State* L)
+	{
+		std::string strMessage = "LUA PUSH DEBUG SCOPE: ";
+		strMessage += lua_tostring(L, 2);
+
+		PD2HOOK_LOG_LUA_DEBUG(strMessage.c_str());
+
+		return 0;
+	}
+
+
+	int lua_application_pop_debug_scope(lua_State* L)
+	{
+		std::string strMessage = "LUA POP DEBUG SCOPE: ";
+		strMessage += lua_tostring(L, 2);
+
+		PD2HOOK_LOG_LUA_DEBUG(strMessage.c_str());
+
+		return 0;
+	}
+
+	int lua_application_debug_stats_prev(lua_State* L)
+	{
+		std::string strMessage = "LUA DEBUG STATS PREV: ";
+		strMessage += lua_tostring(L, 2);
+
+		PD2HOOK_LOG_LUA_DEBUG(strMessage.c_str());
+
+		return 0;
+	}
+
+	int lua_application_debug_stats_next(lua_State* L)
+	{
+		std::string strMessage = "LUA DEBUG STATS NEXT: ";
+		strMessage += lua_tostring(L, 2);
+
+		PD2HOOK_LOG_LUA_DEBUG(strMessage.c_str());
+
+		return 0;
+	}
+
 	void* application_update_new(void* thisptr, long long llUnk0)
 	{
 		// If someone has a better way of doing this, I'd like to know about it.
@@ -682,9 +798,21 @@ namespace pd2hook
 	FuncDetour* gameUpdateDetour = nullptr;
 	FuncDetour* newStateDetour = nullptr;
 	FuncDetour* luaCloseDetour = nullptr;
+	FuncDetour* lua_applicationDebugDetour = nullptr;
+	FuncDetour* lua_applicationTraceDetour = nullptr;
+	FuncDetour* lua_applicationInfoDetour = nullptr;
+	FuncDetour* lua_applicationWarnDetour = nullptr;
+	FuncDetour* lua_applicationErrorDetour = nullptr;
+	FuncDetour* lua_applicationErrorNoStackDetour = nullptr;
+	FuncDetour* lua_applicationPushDebugScopeDetour = nullptr;
+	FuncDetour* lua_applicationPopDebugScopeDetour = nullptr;
+	FuncDetour* lua_applicationDebugStatsPrevDetour = nullptr;
+	FuncDetour* lua_applicationDebugStatsNextDetour = nullptr;
 
 	void InitiateStates() {
 		main_thread_id = std::this_thread::get_id();
+
+		//MessageBoxA(nullptr, "TEST", "TEST", MB_OK);
 
 		if (!InitializeMinHook()) {
 			printf("Critical Error: MinHook library failed to initialize\n");
@@ -697,6 +825,58 @@ namespace pd2hook
 
 		newStateDetour = new FuncDetour(luaL_newstate, luaL_newstate_new);
 		luaL_newstate = reinterpret_cast<luaL_newstateptr>(newStateDetour->GetTrampoline());
+
+		if (lua_app_debug != nullptr)
+			lua_applicationDebugDetour = new FuncDetour(lua_app_debug, lua_application_debug);
+		else
+			PD2HOOK_LOG_ERROR("Failed to hook lua debug method");
+
+		if (lua_app_trace != nullptr)
+			lua_applicationTraceDetour = new FuncDetour(lua_app_trace, lua_application_trace);
+		else
+			PD2HOOK_LOG_ERROR("Failed to hook lua trace method");
+
+		if (lua_app_info != nullptr)
+			lua_applicationInfoDetour = new FuncDetour(lua_app_info, lua_application_info);
+		else
+			PD2HOOK_LOG_ERROR("Failed to hook lua info method");
+
+		if (lua_app_warn != nullptr)
+			lua_applicationWarnDetour = new FuncDetour(lua_app_warn, lua_application_warn);
+		else
+			PD2HOOK_LOG_ERROR("Failed to hook lua warn method");
+
+		if (lua_app_error != nullptr)
+			lua_applicationErrorDetour = new FuncDetour(lua_app_error, lua_application_error);
+		else
+			PD2HOOK_LOG_ERROR("Failed to hook lua error method");
+
+
+		if (lua_applicationErrorNoStackDetour != nullptr)
+			lua_applicationErrorNoStackDetour = new FuncDetour(lua_applicationErrorNoStackDetour, lua_application_error);
+		else
+			PD2HOOK_LOG_ERROR("Failed to hook lua error no stack method");
+
+		if (lua_applicationPushDebugScopeDetour != nullptr)
+			lua_applicationPushDebugScopeDetour = new FuncDetour(lua_applicationPushDebugScopeDetour, lua_application_error);
+		else
+			PD2HOOK_LOG_ERROR("Failed to hook lua push debug scope method");
+
+		if (lua_applicationPopDebugScopeDetour != nullptr)
+			lua_applicationPopDebugScopeDetour = new FuncDetour(lua_applicationPopDebugScopeDetour, lua_application_error);
+		else
+			PD2HOOK_LOG_ERROR("Failed to hook lua pop debug scope method");
+
+		if (lua_applicationDebugStatsPrevDetour != nullptr)
+			lua_applicationDebugStatsPrevDetour = new FuncDetour(lua_applicationDebugStatsPrevDetour, lua_application_error);
+		else
+			PD2HOOK_LOG_ERROR("Failed to hook lua debug stats prev method");
+
+		if (lua_applicationDebugStatsNextDetour != nullptr)
+			lua_applicationDebugStatsNextDetour = new FuncDetour(lua_applicationDebugStatsNextDetour, lua_application_error);
+		else
+			PD2HOOK_LOG_ERROR("Failed to hook lua debug stats next method");
+
 
 		//	luaCallDetour = new FuncDetour(lua_call, lua_newcall);
 		//	lua_call = reinterpret_cast<lua_callptr>(luaCallDetour->GetTrampoline());
