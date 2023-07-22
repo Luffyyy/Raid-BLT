@@ -584,11 +584,22 @@ namespace pd2hook
 		return 1;
 	}
 
+	static bool IsApplicationLogEnabled = false;
+
+	int luaF_EnableApplicationLog(lua_State* L)
+	{
+		IsApplicationLogEnabled = lua_toboolean(L, 1) == 1;
+		return 0;
+	}
+
 	int updates = 0;
 	std::thread::id main_thread_id;
 
 	int lua_application_debug(lua_State* L)
 	{
+		if (!IsApplicationLogEnabled)
+			return 0;
+
 		std::string strMessage = "LUA DEBUG: ";
 		strMessage += lua_tostring(L, 2);
 
@@ -599,6 +610,9 @@ namespace pd2hook
 
 	int lua_application_trace(lua_State* L)
 	{
+		if (!IsApplicationLogEnabled)
+			return 0;
+
 		std::string strMessage = "LUA TRACE: ";
 		strMessage += lua_tostring(L, 2);
 
@@ -609,6 +623,9 @@ namespace pd2hook
 
 	int lua_application_info(lua_State* L)
 	{
+		if (!IsApplicationLogEnabled)
+			return 0;
+
 		std::string strMessage = "LUA INFO: ";
 		strMessage += lua_tostring(L, 2);
 
@@ -619,6 +636,9 @@ namespace pd2hook
 
 	int lua_application_warn(lua_State* L)
 	{
+		if (!IsApplicationLogEnabled)
+			return 0;
+
 		std::string strMessage = "LUA WARN: ";
 		strMessage += lua_tostring(L, 2);
 
@@ -629,6 +649,9 @@ namespace pd2hook
 
 	int lua_application_error(lua_State* L)
 	{
+		if (!IsApplicationLogEnabled)
+			return 0;
+
 		std::string strMessage = "LUA ERROR: ";
 		strMessage += lua_tostring(L, 2);
 
@@ -639,6 +662,9 @@ namespace pd2hook
 
 	int lua_application_error_no_stack(lua_State* L)
 	{
+		if (!IsApplicationLogEnabled)
+			return 0;
+
 		std::string strMessage = "LUA ERROR NO STACK: ";
 		strMessage += lua_tostring(L, 2);
 
@@ -647,9 +673,11 @@ namespace pd2hook
 		return 0;
 	}
 
-
 	int lua_application_push_debug_scope(lua_State* L)
 	{
+		if (!IsApplicationLogEnabled)
+			return 0;
+
 		std::string strMessage = "LUA PUSH DEBUG SCOPE: ";
 		strMessage += lua_tostring(L, 2);
 
@@ -658,9 +686,11 @@ namespace pd2hook
 		return 0;
 	}
 
-
 	int lua_application_pop_debug_scope(lua_State* L)
 	{
+		if (!IsApplicationLogEnabled)
+			return 0;
+
 		std::string strMessage = "LUA POP DEBUG SCOPE: ";
 		strMessage += lua_tostring(L, 2);
 
@@ -671,6 +701,9 @@ namespace pd2hook
 
 	int lua_application_debug_stats_prev(lua_State* L)
 	{
+		if (!IsApplicationLogEnabled)
+			return 0;
+
 		std::string strMessage = "LUA DEBUG STATS PREV: ";
 		strMessage += lua_tostring(L, 2);
 
@@ -681,6 +714,9 @@ namespace pd2hook
 
 	int lua_application_debug_stats_next(lua_State* L)
 	{
+		if (!IsApplicationLogEnabled)
+			return 0;
+
 		std::string strMessage = "LUA DEBUG STATS NEXT: ";
 		strMessage += lua_tostring(L, 2);
 
@@ -713,6 +749,8 @@ namespace pd2hook
 		return application_update(thisptr, llUnk0);
 	}
 
+
+
 	// Random dude who wrote what's his face?
 	// I 'unno, I stole this method from the guy who wrote the 'underground-light-lua-hook'
 	// Mine worked fine, but this seems more elegant.
@@ -741,11 +779,15 @@ namespace pd2hook
 		lua_pushcclosure(L, luaF_dohttpreq, 0);
 		lua_setfield(L, LUA_GLOBALSINDEX, "dohttpreq");
 
+		lua_pushcclosure(L, luaF_EnableApplicationLog, 0);
+		lua_setfield(L, LUA_GLOBALSINDEX, "EnableApplicationLog");
+
 		luaL_Reg consoleLib[] = {
 			{ "CreateConsole", luaF_createconsole },
 			{ "DestroyConsole", luaF_destroyconsole },
 			{ NULL, NULL }
 		};
+
 		luaI_openlib(L, "console", consoleLib, 0);
 
 		luaL_Reg fileLib[] = {
@@ -759,7 +801,7 @@ namespace pd2hook
 			{ NULL, NULL }
 		};
 		luaI_openlib(L, "file", fileLib, 0);
-
+		
 		// Keeping everything in lowercase since IspcallForced / IsPCallForced and Forcepcalls / ForcePCalls look rather weird anyway
 		luaL_Reg bltLib[] = {
 			{ "ispcallforced", luaF_ispcallforced },
