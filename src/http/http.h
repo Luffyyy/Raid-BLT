@@ -6,44 +6,53 @@
 #include <thread>
 #include <list>
 #include <memory>
+#include <string_view>
 
 namespace pd2hook
 {
-typedef void(*HTTPCallback)(void* data, std::string& urlContents);
-typedef void(*HTTPProgress)(void* data, long progress, long total);
+	typedef void (*HTTPCallback)(void *data, std::string &urlContents);
+	typedef void (*HTTPProgress)(void *data, long progress, long total);
 
-struct HTTPItem {
-	HTTPCallback call = nullptr;
-	HTTPProgress progress = nullptr;
-	std::string url;
-	std::string httpContents;
-	void* data = nullptr;
+	struct HTTPItem
+	{
+		HTTPCallback call = nullptr;
+		HTTPProgress progress = nullptr;
+		std::string url;
+		std::string httpContents;
+		void *data = nullptr;
 
-	long byteprogress = 0;
-	long bytetotal = 0;
-};
+		long byteprogress = 0;
+		long bytetotal = 0;
+	};
 
-class HTTPManager {
-private:
-	HTTPManager();
+	class HTTPManager
+	{
+	private:
+		HTTPManager();
 
-public:
-	~HTTPManager();
+	public:
+		~HTTPManager();
 
-	void init_locks();
+		void init_locks();
 
-	static HTTPManager* GetSingleton();
-	static void Destroy(); // exit crash fix
+		inline bool AreLocksInit() const { return m_bLocksInit; }
 
-	void SSL_Lock(int lockno);
-	void SSL_Unlock(int lockno);
+		static HTTPManager *GetSingleton();
+		static void Destroy(); // exit crash fix
 
-	void LaunchHTTPRequest(std::unique_ptr<HTTPItem> callback);
-private:
-	std::unique_ptr<std::mutex[]> openssl_locks;
-	int numLocks = 0;
-	std::list<std::unique_ptr<std::thread>> threadList;
-};
+		void SSL_Lock(int lockno);
+		void SSL_Unlock(int lockno);
+
+		void LaunchHTTPRequest(std::unique_ptr<HTTPItem> callback);
+
+		void DownloadFile(std::string_view strUrl, std::string_view strDestination);
+
+	private:
+		std::unique_ptr<std::mutex[]> openssl_locks;
+		int numLocks = 0;
+		std::list<std::unique_ptr<std::thread>> threadList;
+		bool m_bLocksInit;
+	};
 }
 
 #endif // __HTTP_HEADER__

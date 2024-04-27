@@ -31,7 +31,6 @@ obj/
 [Rr]elease*/
 Ankh.NoLoad
 *.VC.db
-.vs/
 
 #GCC files
 *.o

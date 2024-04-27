@@ -4,8 +4,8 @@
 *.tlog
 /proj/Release/*
 /proj/Debug/*
-/proj/lib
 /build/
+/out/
 
 #DNX
 *_i.c

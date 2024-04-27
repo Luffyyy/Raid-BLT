@@ -50,14 +50,14 @@ CConsole::CConsole() : m_OwnConsole(false) {
 }
 
 CConsole::~CConsole() {
-	if (m_OwnConsole) {
-		//std::cout.rdbuf(sb); // removed for exit crash fix
-		fclose(stdout);
-		fclose(stdin);
-		*stdout = m_OldStdout;
-		*stdin = m_OldStdin;
-		std::ios::sync_with_stdio(); // exit crash fix
-		SetConsoleCtrlHandler(MyConsoleCtrlHandler, FALSE);
-		FreeConsole();
-	}
+	//if (m_OwnConsole) {
+	//	//std::cout.rdbuf(sb); // removed for exit crash fix
+	//	fclose(stdout);
+	//	fclose(stdin);
+	//	*stdout = m_OldStdout;
+	//	*stdin = m_OldStdin;
+	//	std::ios::sync_with_stdio(); // exit crash fix
+	//	SetConsoleCtrlHandler(MyConsoleCtrlHandler, FALSE);
+	//	FreeConsole();
+	//}
 }

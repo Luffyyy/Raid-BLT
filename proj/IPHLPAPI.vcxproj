@@ -112,15 +112,16 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\src;..\lib\curl\include;..\lib\openssl-1.1.0f-vs2017\include64;..\lib\zlib-1.2.11;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src;..\lib\curl\include;..\lib\openssl-1.1.0f-vs2017\include;..\lib\zlib-1.2.11;..\lib\zydis-master\dependencies\zycore\include;..\lib\zydis-master\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PreprocessorDefinitions>CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CURL_STATICLIB;ZYDIS_STATIC_BUILD;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>iphp.def</ModuleDefinitionFile>
-      <AdditionalDependencies>Ws2_32.lib;libcryptoMTd.lib;libsslMTd.lib;Wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../lib/openssl-1.1.0f-vs2017/lib64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Ws2_32.lib;libcryptoMTd.lib;libsslMTd.lib;Wldap32.lib;Version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../lib/openssl-1.1.0f-vs2017/lib</AdditionalLibraryDirectories>
       <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -152,39 +153,58 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\src;..\lib\curl\include;..\lib\openssl-1.1.0f-vs2017\include64;..\lib\zlib-1.2.11;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\src;..\lib\curl\include;..\lib\openssl-1.1.0f-vs2017\include;..\lib\zlib-1.2.11;..\lib\zydis-master\dependencies\zycore\include;..\lib\zydis-master\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CURL_STATICLIB;ZYDIS_STATIC_BUILD;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>iphp.def</ModuleDefinitionFile>
-      <AdditionalDependencies>Ws2_32.lib;libcryptoMT.lib;libsslMT.lib;Wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../lib/openssl-1.1.0f-vs2017/lib64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Ws2_32.lib;libcryptoMT.lib;libsslMT.lib;Wldap32.lib;Version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../lib/openssl-1.1.0f-vs2017/lib</AdditionalLibraryDirectories>
       <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\console\console.cpp" />
+    <ClCompile Include="..\src\Disassembler.cpp" />
+    <ClCompile Include="..\src\FunctionHook.cpp" />
+    <ClCompile Include="..\src\Lua\CustomLua.cpp" />
+    <ClCompile Include="..\src\Lua\Lua.cpp" />
+    <ClCompile Include="..\src\Lua\LuaApplication.cpp" />
+    <ClCompile Include="..\src\SearchRange.cpp" />
+    <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\http\http.cpp" />
     <ClCompile Include="..\src\iphp.cpp" />
     <ClCompile Include="..\src\InitiateState.cpp" />
-    <ClCompile Include="..\src\signatures\signatures.cpp" />
+    <ClCompile Include="..\src\Logger.cpp" />
+    <ClCompile Include="..\src\SearchPattern.cpp" />
     <ClCompile Include="..\src\threading\threadqueue.cpp" />
     <ClCompile Include="..\src\util\compression.cpp" />
     <ClCompile Include="..\src\util\files.cpp" />
-    <ClCompile Include="..\src\util\logging.cpp" />
     <ClCompile Include="..\src\util\util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\console\console.h" />
+    <ClInclude Include="..\src\Disassembler.h" />
+    <ClInclude Include="..\src\FunctionHook.h" />
+    <ClInclude Include="..\src\FunctionPattern.h" />
+    <ClInclude Include="..\src\Lua\CustomLua.h" />
+    <ClInclude Include="..\src\Lua\Lua.h" />
+    <ClInclude Include="..\src\Lua\LuaApplication.hpp" />
+    <ClInclude Include="..\src\SearchRange.h" />
+    <ClInclude Include="..\src\Game.h" />
     <ClInclude Include="..\src\http\http.h" />
     <ClInclude Include="..\src\InitState.h" />
-    <ClInclude Include="..\src\signatures\signatures.h" />
+    <ClInclude Include="..\src\Logger.h" />
+    <ClInclude Include="..\src\SearchPattern.h" />
+    <ClInclude Include="..\src\StringConstants.h" />
     <ClInclude Include="..\src\threading\queue.h" />
     <ClInclude Include="..\src\util\util.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\lib\curl\projects\Windows\VC15\lib\libcurl.vcxproj">
@@ -199,6 +219,15 @@
     <ProjectReference Include="..\lib\zlib-1.2.11\projects\zlibstatic.vcxproj">
       <Project>{86c4d54b-1ee1-34db-8319-41cab57729ac}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\lib\zydis-master\msvc\dependencies\zycore\Zycore.vcxproj">
+      <Project>{e06e2e87-82b9-4dc2-a1e9-fe371cdbaac2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\lib\zydis-master\msvc\zydis\Zydis.vcxproj">
+      <Project>{88a23124-5640-35a0-b890-311d7a67a7d2}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
