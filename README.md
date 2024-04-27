@@ -42,6 +42,7 @@ A compiled version of MinHook is included
 	* awcjack
 	* BangL
 	* Cryfact
+	* shinrax2
 	* chromKa
 	* xDarkWolf
 	* Luffyyy
