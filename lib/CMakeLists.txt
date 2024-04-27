@@ -12,15 +12,6 @@ add_subdirectory(zlib-1.2.11)
 set_property(TARGET zlibstatic PROPERTY
              MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
-#add_subdirectory(libssh2)
-
-#set_property(TARGET libssh2 PROPERTY
-#             MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-
-#set(LIBSSH2_FOUND TRUE)
-#set(LIBSSH2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/build/lib/libssh2/src ${CMAKE_CURRENT_SOURCE_DIR}/libssh2/include)
-#set(LIBSSH2_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libssh2/include)
-#set(LIBSSH2_LIBRARY ${PROJECT_SOURCE_DIR}/build/lib/libssh2/src/Release/libssh2.lib)
 option(CMAKE_USE_OPENSSL "" On)
 option(BUILD_SHARED_LIBS "" Off)
 
