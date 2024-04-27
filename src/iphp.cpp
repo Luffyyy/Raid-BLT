@@ -3,16 +3,16 @@
 
 #pragma pack(1)
 
-
 HINSTANCE hLThis = 0;
 HINSTANCE hL = 0;
-FARPROC p[267] = { 0 };
+FARPROC p[267] = {0};
 
 BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID)
 {
-
 	if (reason == DLL_PROCESS_ATTACH)
 	{
+		// MessageBoxA(nullptr, "DEBUG ME", "DEBUG ME", MB_OK);
+
 		hLThis = hInst;
 
 		char bufd[MAX_PATH];
@@ -20,8 +20,8 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID)
 		strcat_s(bufd, "\\IPHLPAPI.dll");
 
 		hL = LoadLibrary(bufd);
-		if (!hL) return false;
-
+		if (!hL)
+			return false;
 
 		p[0] = GetProcAddress(hL, "AddIPAddress");
 		p[1] = GetProcAddress(hL, "AllocateAndGetInterfaceInfoFromStack");
@@ -292,7 +292,6 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID)
 		p[266] = GetProcAddress(hL, "register_icmp");
 
 		pd2hook::InitiateStates();
-
 	}
 	if (reason == DLL_PROCESS_DETACH)
 	{
@@ -314,7 +313,6 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID)
 // https://github.com/Erik-JS/proxy-dll-64
 
 // FIXME: THIS STUFF ACTUALLY WORKS FINE SOMEHOW AND DON'T ASK ME HOW BECAUSE I MYSELF HAVE NO IDEA EITHER, BUT FIXME ANYWAY!
-
 
 // AddIPAddress
 extern "C" void __stdcall __E__0__()
@@ -689,9 +687,9 @@ extern "C" void __stdcall __E__61__()
 }
 
 // GetAdaptersInfo
-extern "C" /*__declspec(naked)*/ DWORD __stdcall __E__62__(void* pAdapterInfo, void* pOutBufLen)
+extern "C" /*__declspec(naked)*/ DWORD __stdcall __E__62__(void *pAdapterInfo, void *pOutBufLen)
 {
-	typedef DWORD(__stdcall *pS)(void*, void*);
+	typedef DWORD(__stdcall * pS)(void *, void *);
 	pS pps = (pS)p[0 * 4];
 	return pps(pAdapterInfo, pOutBufLen);
 }
@@ -817,9 +815,9 @@ extern "C" void __stdcall __E__82__()
 }
 
 // GetIpAddrTable
-extern "C" /*__declspec(naked)*/ DWORD __stdcall __E__83__(void* pIpAddrTable, void* pdwSize, BOOL bOrder)
+extern "C" /*__declspec(naked)*/ DWORD __stdcall __E__83__(void *pIpAddrTable, void *pdwSize, BOOL bOrder)
 {
-	typedef DWORD(__stdcall *pS)(void*, void*, BOOL);
+	typedef DWORD(__stdcall * pS)(void *, void *, BOOL);
 	pS pps = (pS)p[1 * 4];
 	return pps(pIpAddrTable, pdwSize, bOrder);
 }
@@ -1921,4 +1919,3 @@ extern "C" void __stdcall __E__266__()
 {
 	return;
 }
-

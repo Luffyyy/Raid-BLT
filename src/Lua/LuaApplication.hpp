@@ -1,0 +1,3 @@
+
+
+void EnableApplicationLog(bool value);

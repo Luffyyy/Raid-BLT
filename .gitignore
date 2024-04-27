@@ -2,10 +2,9 @@
 *.obj
 *.log
 *.tlog
-/proj/Release/*
-/proj/Debug/*
-/proj/lib
-/build/
+proj/Release/*
+proj/Debug/*
+build/
 
 #DNX
 *_i.c

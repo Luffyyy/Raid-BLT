@@ -28,11 +28,6 @@
 
 #include <windows.h>
 
-#if defined(_MSC_VER) && !defined(MINHOOK_DISABLE_INTRINSICS)
-    #define ALLOW_INTRINSICS
-    #include <intrin.h>
-#endif
-
 #ifndef ARRAYSIZE
     #define ARRAYSIZE(A) (sizeof(A)/sizeof((A)[0]))
 #endif
@@ -153,7 +148,7 @@ BOOL CreateTrampolineFunction(PTRAMPOLINE ct)
             PUINT32 pRelAddr;
 
             // Avoid using memcpy to reduce the footprint.
-#ifndef ALLOW_INTRINSICS
+#ifndef _MSC_VER
             memcpy(instBuf, (LPBYTE)pOldInst, copySize);
 #else
             __movsb(instBuf, (LPBYTE)pOldInst, copySize);
@@ -209,7 +204,7 @@ BOOL CreateTrampolineFunction(PTRAMPOLINE ct)
                 pCopySrc = &jmp;
                 copySize = sizeof(jmp);
 
-                // Exit the function if it is not in the branch.
+                // Exit the function If it is not in the branch
                 finished = (pOldInst >= jmpDest);
             }
         }
@@ -278,14 +273,15 @@ BOOL CreateTrampolineFunction(PTRAMPOLINE ct)
         ct->nIP++;
 
         // Avoid using memcpy to reduce the footprint.
-#ifndef ALLOW_INTRINSICS
+#ifndef _MSC_VER
         memcpy((LPBYTE)ct->pTrampoline + newPos, pCopySrc, copySize);
 #else
-        __movsb((LPBYTE)ct->pTrampoline + newPos, (LPBYTE)pCopySrc, copySize);
+        __movsb((LPBYTE)ct->pTrampoline + newPos, pCopySrc, copySize);
 #endif
         newPos += copySize;
         oldPos += hs.len;
-    } while (!finished);
+    }
+    while (!finished);
 
     // Is there enough place for a long jump?
     if (oldPos < sizeof(JMP_REL)

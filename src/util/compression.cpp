@@ -63,7 +63,7 @@ std::string DecompressData(const DataPair_t& compressedData)
 
 	auto ret = inflateInit2(&stream, -MAX_WBITS);
 
-	stream.avail_in = compressedData.second.size();
+	stream.avail_in = static_cast<uInt>(compressedData.second.size());
 	stream.next_in = reinterpret_cast<unsigned char*>(const_cast<char *>(compressedData.second.data()));
 
 	std::unique_ptr<unsigned char[]> out(new unsigned char[compressedData.first + 1]);
@@ -122,7 +122,7 @@ std::unique_ptr<ZIPFileData> ReadFile(ByteStream& mainStream)
 bool WriteFile(const std::string& extractPath, const ZIPFileData& data)
 {
 	const std::string finalWritePath = extractPath + "/" + data.filepath;
-	PD2HOOK_LOG_LOG("Extracting to " << finalWritePath);
+	PD2HOOK_LOG_LOG("Extracting to {}", finalWritePath);
 	Util::EnsurePathWritable(finalWritePath);
 
 	std::ofstream outFile(finalWritePath.c_str(), std::ios::binary);

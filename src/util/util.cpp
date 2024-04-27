@@ -97,7 +97,7 @@ namespace pd2hook
 			bool success = MoveFileEx(path.c_str(), destination.c_str(), MOVEFILE_WRITE_THROUGH);
 			if (!success)
 			{
-				PD2HOOK_LOG_LOG("MoveFileEx failed with error " << GetLastError());
+				PD2HOOK_LOG_LOG("MoveFileEx failed with error {}", GetLastError());
 			}
 			return success;
 		}

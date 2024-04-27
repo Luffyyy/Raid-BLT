@@ -86,7 +86,7 @@ const char *IOException::exceptionName() const
 	}
 
 	void EnsurePathWritable(const std::string& path){
-		int finalSlash = path.find_last_of('/');
+		size_t finalSlash = path.find_last_of('/');
 		std::string finalPath = path.substr(0, finalSlash);
 		if (DirectoryExists(finalPath)) return;
 		CreateDirectoryPath(finalPath);
