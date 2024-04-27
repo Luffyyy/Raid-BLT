@@ -163,7 +163,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>iphp.def</ModuleDefinitionFile>
-      <AdditionalDependencies>Ws2_32.lib;libcryptoMT.lib;libsslMT.lib;Wldap32.lib;Version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Ws2_32.lib;libcryptoMT.lib;libsslMT.lib;Wldap32.lib;Version.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../lib/openssl-1.1.0f-vs2017/lib</AdditionalLibraryDirectories>
       <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -209,9 +209,6 @@
   <ItemGroup>
     <ProjectReference Include="..\lib\curl\projects\Windows\VC15\lib\libcurl.vcxproj">
       <Project>{da6f56b4-06a4-441d-ad70-ac5a7d51fadb}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\lib\libssh2\projects\src\libssh2.vcxproj">
-      <Project>{1f8bec10-1f02-3ec6-a421-7460cefa614c}</Project>
     </ProjectReference>
     <ProjectReference Include="..\lib\minhook\build\VC15\libMinHook.vcxproj">
       <Project>{f142a341-5ee0-442d-a15f-98ae9b48dbae}</Project>
