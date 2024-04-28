@@ -12,8 +12,9 @@ set_property(TARGET zlibstatic PROPERTY
              MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
 # curl options
-option(CMAKE_USE_OPENSSL "" ON)
-option(BUILD_SHARED_LIBS "" OFF)
+set(CMAKE_USE_OPENSSL "" ON)
+set(CMAKE_USE_LIBSSH2 "" OFF)
+set(BUILD_SHARED_LIBS "" OFF)
 set(CURL_DISABLE_DICT "" ON)
 set(CURL_DISABLE_FILE "" ON)
 set(CURL_DISABLE_FTP "" ON)
@@ -28,6 +29,7 @@ set(CURL_DISABLE_TELNET "" ON)
 set(CURL_DISABLE_TFTP "" ON)
 set(BUILD_CURL_EXE "" OFF)
 set(ENABLE_THREADED_RESOLVER "" ON)
+set(BUILD_TESTING "" OFF)
 
 add_subdirectory(curl)
 
