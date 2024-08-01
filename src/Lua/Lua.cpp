@@ -178,7 +178,7 @@ DEFINE_LUA_PATTERN_FUNC(luaL_ref, int, lua_State*, int)
 DEFINE_LUA_PATTERN_FUNC(lua_rawgeti, void, lua_State*, int, int)
 DEFINE_LUA_PATTERN_FUNC(lua_rawseti, void, lua_State*, int, int)
 DEFINE_LUA_PATTERN_FUNC(lua_type, int, lua_State*, int)
-DEFINE_LUA_PATTERN_FUNC(lua_typename, const char*, lua_State*, int)
+//DEFINE_LUA_PATTERN_FUNC(lua_typename, const char*, lua_State*, int)
 DEFINE_LUA_PATTERN_FUNC(luaL_unref, void, lua_State*, int, int)
 
 void(*lua_call)(lua_State*, int, int) = nullptr;

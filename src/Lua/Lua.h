@@ -108,7 +108,7 @@ DECLARE_LUA_PATTERN_FUNC(luaL_ref, int, lua_State*, int)
 DECLARE_LUA_PATTERN_FUNC(lua_rawgeti, void, lua_State*, int, int)
 DECLARE_LUA_PATTERN_FUNC(lua_rawseti, void, lua_State*, int, int)
 DECLARE_LUA_PATTERN_FUNC(lua_type, int, lua_State*, int)
-DECLARE_LUA_PATTERN_FUNC(lua_typename, const char*, lua_State*, int)
+//DECLARE_LUA_PATTERN_FUNC(lua_typename, const char*, lua_State*, int)
 DECLARE_LUA_PATTERN_FUNC(luaL_unref, void, lua_State*, int, int)
 DECLARE_LUA_PATTERN_FUNC(luaL_newstate, void*, void*, bool, bool, int)
 

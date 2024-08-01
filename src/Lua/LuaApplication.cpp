@@ -46,9 +46,9 @@ FunctionHook<TRet, TArgs...> CreateFunctionHook(std::string_view strName,
 			break;
 	}
 
-	if (pFunction == nullptr)
+	if (pFunction != nullptr)
 	{
-		PD2HOOK_LOG_LOG("Function '{0}' found -> 0x{1:016x}", strName, reinterpret_cast<uint64_t>(s_luaAppRegisterFuncAddress));
+		PD2HOOK_LOG_LOG("Function '{0}' found -> 0x{1:016x}", strName, reinterpret_cast<uint64_t>(pFunction));
 	}
 	else
 	{
@@ -171,4 +171,4 @@ LUA_FUNCTION_HOOK(lua_app_trace, lua_application_trace, "trace");
 LUA_FUNCTION_HOOK(lua_app_info, lua_application_info, "info");
 LUA_FUNCTION_HOOK(lua_app_warn, lua_application_warn, "warn");
 LUA_FUNCTION_HOOK(lua_app_error, lua_application_error, "error");
-LUA_FUNCTION_HOOK(lua_app_log, lua_application_log, "log");
+//LUA_FUNCTION_HOOK(lua_app_log, lua_application_log, "log"); // removed?
