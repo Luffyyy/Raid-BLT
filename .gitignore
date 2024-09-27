@@ -87,3 +87,5 @@ lib/zlib.*
 /proj/output/Debug/x64/msvc
 /proj/.build/Release/x64/msvc
 /proj/output/Release/x64/msvc
+
+!src/Lua/luajit/lj_vm.obj
