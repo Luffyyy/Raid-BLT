@@ -4,6 +4,16 @@
 #include "FunctionHook.h"
 #include <memory>
 
+extern "C" {
+    #include <Lua/luajit/luajit/src/lua.h>
+    #include <Lua/luajit/luajit/src/lauxlib.h>
+}
+
+#define DECLARE_LUA_PATTERN_FUNC(name, ret, ...) \
+	extern ret(*name)(__VA_ARGS__);
+
+DECLARE_LUA_PATTERN_FUNC(luaL_newstate_exe, void*, void*, bool, bool, int)
+/*
 struct lua_State;
 
 typedef const char* (*lua_Reader)(lua_State* L, void* ud, size_t* sz);
@@ -75,9 +85,6 @@ typedef void (*lua_Hook)(lua_State* L, lua_Debug* ar);
 
 // lua c-functions
 
-#define DECLARE_LUA_PATTERN_FUNC(name, ret, ...) \
-	extern ret(*name)(__VA_ARGS__);
-
 DECLARE_LUA_PATTERN_FUNC(lua_call, void, lua_State*, int, int)
 DECLARE_LUA_PATTERN_FUNC(lua_pcall, int, lua_State*, int, int, int)
 DECLARE_LUA_PATTERN_FUNC(lua_gettop, int, lua_State*)
@@ -110,7 +117,6 @@ DECLARE_LUA_PATTERN_FUNC(lua_rawseti, void, lua_State*, int, int)
 DECLARE_LUA_PATTERN_FUNC(lua_type, int, lua_State*, int)
 //DECLARE_LUA_PATTERN_FUNC(lua_typename, const char*, lua_State*, int)
 DECLARE_LUA_PATTERN_FUNC(luaL_unref, void, lua_State*, int, int)
-DECLARE_LUA_PATTERN_FUNC(luaL_newstate, void*, void*, bool, bool, int)
 
 #undef DECLARE_LUA_PATTERN_FUNC
 
@@ -126,7 +132,7 @@ DECLARE_LUA_PATTERN_FUNC(luaL_newstate, void*, void*, bool, bool, int)
 #define lua_getglobal(L, s) lua_getfield(L, LUA_GLOBALSINDEX, (s))
 #define lua_setglobal(L, s) lua_setfield(L, LUA_GLOBALSINDEX, (s))
 #define lua_tostring(L, i) lua_tolstring(L, (i), NULL)
-
+*/
 void lua_init(void(*luaFuncReg)(lua_State* L));
 
 bool check_active_state(lua_State* L);

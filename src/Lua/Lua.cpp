@@ -123,7 +123,7 @@ void luaF_close(lua_State* L)
 
 void* luaL_newstate_new(void* thislol, bool no, bool freakin, int clue)
 {
-	void* ret = reinterpret_cast<void*>(luaL_newstate(thislol, no, freakin, clue));
+	void* ret = reinterpret_cast<void*>(luaL_newstate_exe(thislol, no, freakin, clue));
 
 	lua_State* L = (lua_State*)*((void**)thislol);
 
@@ -150,7 +150,7 @@ LUA_FUNCTION_PATTERN_HOOK(lua_close, luaF_close)
 #define DEFINE_LUA_PATTERN_FUNC(name, ret, ...) \
 	ret(*name)(__VA_ARGS__) = FindFunctionAddress<ret, __VA_ARGS__>(#name, name ## _pattern);
 
-DEFINE_LUA_PATTERN_FUNC(lua_pcall, int, lua_State*, int, int, int)
+/*DEFINE_LUA_PATTERN_FUNC(lua_pcall, int, lua_State*, int, int, int)
 DEFINE_LUA_PATTERN_FUNC(lua_gettop, int, lua_State*)
 DEFINE_LUA_PATTERN_FUNC(lua_settop, void, lua_State*, int)
 DEFINE_LUA_PATTERN_FUNC(lua_toboolean, int, lua_State*, int)
@@ -179,17 +179,17 @@ DEFINE_LUA_PATTERN_FUNC(lua_rawgeti, void, lua_State*, int, int)
 DEFINE_LUA_PATTERN_FUNC(lua_rawseti, void, lua_State*, int, int)
 DEFINE_LUA_PATTERN_FUNC(lua_type, int, lua_State*, int)
 //DEFINE_LUA_PATTERN_FUNC(lua_typename, const char*, lua_State*, int)
-DEFINE_LUA_PATTERN_FUNC(luaL_unref, void, lua_State*, int, int)
+DEFINE_LUA_PATTERN_FUNC(luaL_unref, void, lua_State*, int, int)*/
 
-void(*lua_call)(lua_State*, int, int) = nullptr;
-void* (*luaL_newstate)(void*, bool, bool, int) = nullptr;
-void(*lua_close)(lua_State*) = nullptr;
+void(*lua_call_exe)(lua_State*, int, int) = nullptr;
+void* (*luaL_newstate_exe)(void*, bool, bool, int) = nullptr;
+void(*lua_close_exe)(lua_State*) = nullptr;
 
 void lua_init(void(*luaFuncReg)(lua_State* L))
 {
-	lua_call_hook.GetNewFunction(lua_call);
-	luaL_newstate_hook.GetNewFunction(luaL_newstate);
-	lua_close_hook.GetNewFunction(lua_close);
+	lua_call_hook.GetNewFunction(lua_call_exe);
+	luaL_newstate_hook.GetNewFunction(luaL_newstate_exe);
+	lua_close_hook.GetNewFunction(lua_close_exe);
 
 	s_LuaNewStateCallback = luaFuncReg;
 }

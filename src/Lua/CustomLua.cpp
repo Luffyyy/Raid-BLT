@@ -232,6 +232,7 @@ int luaF_dofile(lua_State *L)
 	size_t length = 0;
 	const char *filename = lua_tolstring(L, 1, &length);
 	int error = luaL_loadfilex(L, filename, nullptr);
+
 	if (error != 0)
 	{
 		size_t len;
@@ -456,7 +457,7 @@ void register_lua_functions(lua_State *L)
 		{"CreateConsole", luaF_createconsole},
 		{"DestroyConsole", luaF_destroyconsole},
 		{NULL, NULL}};
-	luaI_openlib(L, "console", consoleLib, 0);
+	luaL_register(L, "console", consoleLib);
 
 	luaL_Reg fileLib[] = {
 		{"GetDirectories", luaF_getdir},
@@ -467,7 +468,7 @@ void register_lua_functions(lua_State *L)
 		{"FileHash", luaF_filehash},
 		{"MoveDirectory", luaF_moveDirectory},
 		{NULL, NULL}};
-	luaI_openlib(L, "file", fileLib, 0);
+	luaL_register(L, "file", fileLib);
 
 	// Keeping everything in lowercase since IspcallForced / IsPCallForced and Forcepcalls / ForcePCalls look rather weird anyway
 	luaL_Reg bltLib[] = {
@@ -476,7 +477,7 @@ void register_lua_functions(lua_State *L)
 		{"GetDllVersion", luaF_GetDllVersion},
 		{"EnableApplicationLog", luaF_EnableApplicationLog},
 		{NULL, NULL}};
-	luaI_openlib(L, "blt", bltLib, 0);
+	luaL_register(L, "blt", bltLib);
 
 	int result;
 	PD2HOOK_LOG_LOG("Initiating Hook");
