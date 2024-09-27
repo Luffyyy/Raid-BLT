@@ -29,8 +29,8 @@ static BOOL WINAPI MyConsoleCtrlHandler(DWORD dwCtrlEvent) { return dwCtrlEvent 
 CConsole::CConsole() : m_OwnConsole(false) {
 	if (!AllocConsole()) return;
 
-	SetConsoleCtrlHandler(MyConsoleCtrlHandler, TRUE);
-	RemoveMenu(GetSystemMenu(GetConsoleWindow(), FALSE), SC_CLOSE, MF_BYCOMMAND);
+	//SetConsoleCtrlHandler(MyConsoleCtrlHandler, TRUE);
+	//RemoveMenu(GetSystemMenu(GetConsoleWindow(), FALSE), SC_CLOSE, MF_BYCOMMAND);
 	const int in = _open_osfhandle(INT_PTR(GetStdHandle(STD_INPUT_HANDLE)), _O_TEXT);
 	const int out = _open_osfhandle(INT_PTR(GetStdHandle(STD_OUTPUT_HANDLE)), _O_TEXT);
 	

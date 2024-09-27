@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <filesystem>
+#include <format>
 
 #include <Windows.h>
 
@@ -109,21 +110,24 @@ void Logger::Log(LogType type, std::string_view strText, std::string_view file, 
 	if (type < m_currentLogLevel)
 		return;
 
-	std::string strMessage = std::vformat("{0:%I}:{0:%M}:{0:%OS} {0:%p} {1}: {2}", std::make_format_args(std::chrono::system_clock::now(), GetLogTypeString(type), strText));
+    auto time = std::chrono::system_clock::now();
+    std::string_view logType = GetLogTypeString(type);
+
+	std::string strMessage = std::vformat("{0:%I}:{0:%M}:{0:%OS} {0:%p} {1}: {2}", std::make_format_args(time, logType, strText));
 
 	if (!file.empty() && line > 0)
 	{
-		auto str = std::vformat("{0:%I}:{0:%M}:{0:%OS} {0:%p} {1}: ({2}:{3}) {4}", std::make_format_args(std::chrono::system_clock::now(), GetLogTypeString(type), file, line, strText));
+		auto str = std::vformat("{0:%I}:{0:%M}:{0:%OS} {0:%p} {1}: ({2}:{3}) {4}", std::make_format_args(time, logType, file, line, strText));
 		WriteMessage(type, str, strMessage);
 	}
 	else if (!file.empty())
 	{
-		auto str = std::vformat("{0:%I}:{0:%M}:{0:%OS} {0:%p} {1}: ({2}) {3}", std::make_format_args(std::chrono::system_clock::now(), GetLogTypeString(type), file, strText));
+		auto str = std::vformat("{0:%I}:{0:%M}:{0:%OS} {0:%p} {1}: ({2}) {3}", std::make_format_args(time, logType, file, strText));
 		WriteMessage(type, str, strMessage);
 	}
 	else
 	{
-		auto str = std::vformat("{0:%I}:{0:%M}:{0:%OS} {0:%p} {1}: {2}", std::make_format_args(std::chrono::system_clock::now(), GetLogTypeString(type), strText));
+		auto str = std::vformat("{0:%I}:{0:%M}:{0:%OS} {0:%p} {1}: {2}", std::make_format_args(time, logType, strText));
 		WriteMessage(type, str, strMessage);
 	}
 }
