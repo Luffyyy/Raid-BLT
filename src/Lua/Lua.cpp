@@ -67,15 +67,15 @@ void lua_newcall(lua_State* L, int args, int returns)
 {
 	// TODO: Optimize this to avoid incurring global table lookup costs whenever a function is called
 		// https://stackoverflow.com/questions/30021904/lua-set-default-error-handler/30022216#30022216
-	lua_getglobal(L, "debug");
-	lua_getfield(L, -1, "traceback");
-	lua_remove(L, -2);
+	//lua_getglobal(L, "debug");
+	//lua_getfield(L, -1, "traceback");
+	//lua_remove(L, -2);
 	// Do not index from the top (i.e. use a negative index) as this has the potential to mess up if the callee function returns
 	// values /and/ lua_pcall() is set up with a > 0 nresults argument
-	int errorhandler = lua_gettop(L) - args - 1;
-	lua_insert(L, errorhandler);
+	//int errorhandler = lua_gettop(L) - args - 1;
+	//lua_insert(L, errorhandler);
 
-	int result = lua_pcall(L, args, returns, errorhandler);
+	int result = lua_pcall(L, args, returns, 0);
 	if (result != 0)
 	{
 		size_t len;
@@ -89,7 +89,7 @@ void lua_newcall(lua_State* L, int args, int returns)
 	}
 	// This call removes the error handler from the stack. Do not use lua_pop() as the callee function's return values may be
 	// present, which would pop one of those instead and leave the error handler on the stack
-	lua_remove(L, errorhandler);
+	//lua_remove(L, errorhandler);
 }
 
 void add_active_state(lua_State* L)
