@@ -11,8 +11,6 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID)
 {
 	if (reason == DLL_PROCESS_ATTACH)
 	{
-		// MessageBoxA(nullptr, "DEBUG ME", "DEBUG ME", MB_OK);
-
 		hLThis = hInst;
 
 		char bufd[MAX_PATH];

@@ -121,11 +121,11 @@ void luaF_close(lua_State* L)
 	lua_close(L);
 }
 
-void* luaL_newstate_new(void* thislol, bool no, bool freakin, int clue)
+void* luaL_newstate_new(void* _this)
 {
-	void* ret = reinterpret_cast<void*>(luaL_newstate_exe(thislol, no, freakin, clue));
+	void* ret = reinterpret_cast<void*>(luaL_newstate_exe(_this));
 
-	lua_State* L = (lua_State*)*((void**)thislol);
+	lua_State* L = (lua_State*)*((void**)_this);
 
 	PD2HOOK_LOG_LOG("Lua State: 0x{0:016x}", reinterpret_cast<uint64_t>(L));
 
@@ -150,39 +150,8 @@ LUA_FUNCTION_PATTERN_HOOK(lua_close, luaF_close)
 #define DEFINE_LUA_PATTERN_FUNC(name, ret, ...) \
 	ret(*name)(__VA_ARGS__) = FindFunctionAddress<ret, __VA_ARGS__>(#name, name ## _pattern);
 
-/*DEFINE_LUA_PATTERN_FUNC(lua_pcall, int, lua_State*, int, int, int)
-DEFINE_LUA_PATTERN_FUNC(lua_gettop, int, lua_State*)
-DEFINE_LUA_PATTERN_FUNC(lua_settop, void, lua_State*, int)
-DEFINE_LUA_PATTERN_FUNC(lua_toboolean, int, lua_State*, int)
-DEFINE_LUA_PATTERN_FUNC(lua_tointeger, ptrdiff_t, lua_State*, int)
-DEFINE_LUA_PATTERN_FUNC(lua_tonumber, lua_Number, lua_State*, int)
-DEFINE_LUA_PATTERN_FUNC(lua_tolstring, const char*, lua_State*, int, size_t*)
-DEFINE_LUA_PATTERN_FUNC(lua_objlen, size_t, lua_State*, int)
-DEFINE_LUA_PATTERN_FUNC(luaL_loadfilex, int, lua_State*, const char*, const char*)
-DEFINE_LUA_PATTERN_FUNC(luaL_loadstring, int, lua_State*, const char*)
-DEFINE_LUA_PATTERN_FUNC(lua_getfield, void, lua_State*, int, const char*)
-DEFINE_LUA_PATTERN_FUNC(lua_setfield, int, lua_State*, int, const char*)
-DEFINE_LUA_PATTERN_FUNC(lua_createtable, void, lua_State*, int, int)
-DEFINE_LUA_PATTERN_FUNC(lua_insert, void, lua_State*, int)
-DEFINE_LUA_PATTERN_FUNC(lua_remove, void, lua_State*, int)
-DEFINE_LUA_PATTERN_FUNC(lua_newstate, lua_State*, lua_Alloc, void*)
-DEFINE_LUA_PATTERN_FUNC(lua_settable, void, lua_State*, int)
-DEFINE_LUA_PATTERN_FUNC(lua_pushinteger, void, lua_State*, ptrdiff_t)
-DEFINE_LUA_PATTERN_FUNC(lua_pushboolean, void, lua_State*, bool)
-DEFINE_LUA_PATTERN_FUNC(lua_pushcclosure, void, lua_State*, lua_CFunction, int)
-DEFINE_LUA_PATTERN_FUNC(lua_pushlstring, void, lua_State*, const char*, size_t)
-DEFINE_LUA_PATTERN_FUNC(lua_pushstring, void, lua_State*, const char*)
-DEFINE_LUA_PATTERN_FUNC(lua_checkstack, int, lua_State*, int)
-DEFINE_LUA_PATTERN_FUNC(luaI_openlib, void, lua_State*, const char*, const luaL_Reg*, int)
-DEFINE_LUA_PATTERN_FUNC(luaL_ref, int, lua_State*, int)
-DEFINE_LUA_PATTERN_FUNC(lua_rawgeti, void, lua_State*, int, int)
-DEFINE_LUA_PATTERN_FUNC(lua_rawseti, void, lua_State*, int, int)
-DEFINE_LUA_PATTERN_FUNC(lua_type, int, lua_State*, int)
-//DEFINE_LUA_PATTERN_FUNC(lua_typename, const char*, lua_State*, int)
-DEFINE_LUA_PATTERN_FUNC(luaL_unref, void, lua_State*, int, int)*/
-
 void(*lua_call_exe)(lua_State*, int, int) = nullptr;
-void* (*luaL_newstate_exe)(void*, bool, bool, int) = nullptr;
+void* (*luaL_newstate_exe)(void*) = nullptr;
 void(*lua_close_exe)(lua_State*) = nullptr;
 
 void lua_init(void(*luaFuncReg)(lua_State* L))

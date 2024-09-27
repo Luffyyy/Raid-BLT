@@ -4,17 +4,12 @@
 
 #include <filesystem>
 
-
-// Code taken from LuaJIT 2.1.0-beta2
 namespace pd2hook
 {
 	void validate_mod_directories()
 	{
 		if (!std::filesystem::exists("mods"))
 			std::filesystem::create_directory("mods");
-
-		if (!std::filesystem::exists("mods/downloads"))
-			std::filesystem::create_directory("mods/downloads");
 
 		if (!std::filesystem::exists("mods/logs"))
 			std::filesystem::create_directory("mods/logs");
@@ -25,6 +20,11 @@ namespace pd2hook
 
 	void InitiateStates()
 	{
+		std::ifstream infiledebug("mods/debugger.txt");
+
+		if (infiledebug.good())
+			MessageBoxA(nullptr, "DEBUG ME", "DEBUG ME", MB_OK);
+
 		validate_mod_directories();
 
 		FunctionHookManager::Setup();
