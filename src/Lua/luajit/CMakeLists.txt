@@ -91,9 +91,9 @@ add_executable(LuaBuildVM ${LUA51_BUILDVM_SOURCES})
 add_executable(luajit ${LUAJIT_SOURCES})
 
 target_link_libraries(luajit lua51 ${CMAKE_CURRENT_SOURCE_DIR}/lj_vm.obj)
-target_link_libraries(lua51)
 
 target_include_directories(lua51 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/luajit/src)
+target_include_directories(lua51-shared PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/luajit/src)
 target_include_directories(LuaBuildVM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/luajit/src)
 target_include_directories(luajit PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/luajit/src)
 
@@ -103,6 +103,11 @@ set_property(TARGET lua51 PROPERTY
              MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
 set_property(TARGET lua51 PROPERTY CXX_STANDARD 20)
+
+set_property(TARGET lua51-shared PROPERTY
+             MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
+set_property(TARGET lua51-shared PROPERTY CXX_STANDARD 20)
 
 set_property(TARGET LuaBuildVM PROPERTY
              MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
