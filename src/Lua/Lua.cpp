@@ -63,19 +63,25 @@ void NotifyErrorOverlay(lua_State* L, const char* message)
 	}
 }
 
-void lua_newcall(lua_State* L, int args, int returns)
+void luaF_call(lua_State* L, int args, int returns)
 {
-	// TODO: Optimize this to avoid incurring global table lookup costs whenever a function is called
-		// https://stackoverflow.com/questions/30021904/lua-set-default-error-handler/30022216#30022216
-	//lua_getglobal(L, "debug");
-	//lua_getfield(L, -1, "traceback");
-	//lua_remove(L, -2);
+	// https://stackoverflow.com/questions/30021904/lua-set-default-error-handler/30022216#30022216
+	lua_getglobal(L, "debug");
+	if (lua_isnil(L, -1))
+	{
+		// Debug isn't available, use normal call
+		lua_remove(L, -1);
+		lua_call_exe(L, args, returns);
+		return;
+	}
+	lua_getfield(L, -1, "traceback");
+	lua_remove(L, -2);
 	// Do not index from the top (i.e. use a negative index) as this has the potential to mess up if the callee function returns
 	// values /and/ lua_pcall() is set up with a > 0 nresults argument
-	//int errorhandler = lua_gettop(L) - args - 1;
-	//lua_insert(L, errorhandler);
+	int errorhandler = lua_gettop(L) - args - 1;
+	lua_insert(L, errorhandler);
 
-	int result = lua_pcall(L, args, returns, 0);
+	int result = lua_pcall(L, args, returns, errorhandler);
 	if (result != 0)
 	{
 		size_t len;
@@ -89,7 +95,7 @@ void lua_newcall(lua_State* L, int args, int returns)
 	}
 	// This call removes the error handler from the stack. Do not use lua_pop() as the callee function's return values may be
 	// present, which would pop one of those instead and leave the error handler on the stack
-	//lua_remove(L, errorhandler);
+	lua_remove(L, errorhandler);
 }
 
 void add_active_state(lua_State* L)
@@ -118,12 +124,12 @@ bool check_active_state(lua_State* L)
 void luaF_close(lua_State* L)
 {
 	remove_active_state(L);
-	lua_close(L);
+	lua_close_exe(L);
 }
 
-void* luaL_newstate_new(void* _this)
+void* luaF_newstate(void* _this, char a, char b, int c)
 {
-	void* ret = reinterpret_cast<void*>(luaL_newstate_exe(_this));
+	void* ret = reinterpret_cast<void*>(luaL_newstate_exe(_this, a, b, c));
 
 	lua_State* L = (lua_State*)*((void**)_this);
 
@@ -143,15 +149,15 @@ void* luaL_newstate_new(void* _this)
 #define LUA_FUNCTION_PATTERN_HOOK(name, target) \
 	auto name ## _hook = CreateFunctionHook(#name, target, name ## _pattern);
  
-LUA_FUNCTION_PATTERN_HOOK(lua_call, lua_newcall)
-LUA_FUNCTION_PATTERN_HOOK(luaL_newstate, luaL_newstate_new)
+LUA_FUNCTION_PATTERN_HOOK(lua_call, luaF_call)
+LUA_FUNCTION_PATTERN_HOOK(luaL_newstate, luaF_newstate)
 LUA_FUNCTION_PATTERN_HOOK(lua_close, luaF_close)
 
 #define DEFINE_LUA_PATTERN_FUNC(name, ret, ...) \
 	ret(*name)(__VA_ARGS__) = FindFunctionAddress<ret, __VA_ARGS__>(#name, name ## _pattern);
 
 void(*lua_call_exe)(lua_State*, int, int) = nullptr;
-void* (*luaL_newstate_exe)(void*) = nullptr;
+void* (*luaL_newstate_exe)(void*, char, char, int) = nullptr;
 void(*lua_close_exe)(lua_State*) = nullptr;
 
 void lua_init(void(*luaFuncReg)(lua_State* L))
