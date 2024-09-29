@@ -36,8 +36,8 @@ set(IPHLPAPI_SOURCES
     util/files.cpp
     util/util.cpp
     util/util.h
-	../proj/Resource.h
-	../proj/Resource.rc
+	../Resource.h
+	../Resource.rc
 )
 
 add_library(IPHLPAPI SHARED ${IPHLPAPI_SOURCES})
@@ -54,4 +54,4 @@ set_property(TARGET IPHLPAPI PROPERTY
 
 set_property(TARGET IPHLPAPI PROPERTY CXX_STANDARD 20)
 
-set_target_properties(IPHLPAPI PROPERTIES LINK_FLAGS "/DEF:\"${CMAKE_CURRENT_SOURCE_DIR}/../proj/iphp.def\"")
+set_target_properties(IPHLPAPI PROPERTIES LINK_FLAGS "/DEF:\"${CMAKE_CURRENT_SOURCE_DIR}/../iphp.def\"")
