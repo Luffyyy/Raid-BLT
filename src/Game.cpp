@@ -26,7 +26,7 @@ void* application_update_new(void* thisptr, long long llUnk0)
 		if (!pd2hook::HTTPManager::GetSingleton()->AreLocksInit())
 			pd2hook::HTTPManager::GetSingleton()->init_locks();
 
-		++s_updates;
+		//++s_updates;
 	}
 
 	if (s_updates > 1)

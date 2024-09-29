@@ -29,9 +29,9 @@ namespace pd2hook
 	using HTTPProgressNotificationPtr = std::unique_ptr<HTTPProgressNotification>;
 	using HTTPItemPtr = std::unique_ptr<HTTPItem>;
 	PD2HOOK_REGISTER_EVENTQUEUE(HTTPProgressNotificationPtr, HTTPProgressNotification)
-	PD2HOOK_REGISTER_EVENTQUEUE(HTTPItemPtr, HTTPItem)
+		PD2HOOK_REGISTER_EVENTQUEUE(HTTPItemPtr, HTTPItem)
 
-	void lock_callback(int mode, int type, const char *file, int line)
+		void lock_callback(int mode, int type, const char *file, int line)
 	{
 		if (mode & CRYPTO_LOCK)
 		{
@@ -58,7 +58,7 @@ namespace pd2hook
 		curl_global_cleanup();
 
 		std::for_each(threadList.begin(), threadList.end(), [](const std::unique_ptr<std::thread> &t)
-					  { t->join(); });
+			{ t->join(); });
 	}
 
 	void HTTPManager::init_locks()
@@ -179,7 +179,13 @@ namespace pd2hook
 
 		auto res = curl_easy_perform(curl);
 
-		curl_easy_cleanup(curl);
+		try
+		{
+			curl_easy_cleanup(curl);
+		}
+		catch (std::exception e) {
+			PD2HOOK_LOG_WARN("CURL cleanup failed.");
+		}
 
 		GetHTTPItemQueue().AddToQueue(run_http_event, std::move(item));
 	}
@@ -222,7 +228,14 @@ namespace pd2hook
 
 		res = curl_easy_perform(curl);
 
-		curl_easy_cleanup(curl);
+		try
+		{
+			curl_easy_cleanup(curl);
+		}
+		catch (std::exception e) {
+			PD2HOOK_LOG_WARN("CURL cleanup failed.");
+		}
+
 		fclose(fp);
 	}
 }
