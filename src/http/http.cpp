@@ -183,7 +183,7 @@ namespace pd2hook
 		{
 			curl_easy_cleanup(curl);
 		}
-		catch (std::exception e) {
+		catch (...) {
 			PD2HOOK_LOG_WARN("CURL cleanup failed.");
 		}
 
@@ -232,7 +232,7 @@ namespace pd2hook
 		{
 			curl_easy_cleanup(curl);
 		}
-		catch (std::exception e) {
+		catch (...) {
 			PD2HOOK_LOG_WARN("CURL cleanup failed.");
 		}
 
