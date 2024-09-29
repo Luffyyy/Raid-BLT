@@ -63,7 +63,7 @@ void NotifyErrorOverlay(lua_State* L, const char* message)
 	}
 }
 
-void luaF_call(lua_State* L, int args, int returns)
+void luaH_call(lua_State* L, int args, int returns)
 {
 	// https://stackoverflow.com/questions/30021904/lua-set-default-error-handler/30022216#30022216
 	lua_getglobal(L, "debug");
@@ -105,7 +105,8 @@ void add_active_state(lua_State* L)
 
 void remove_active_state(lua_State* L)
 {
-	activeStates.remove(L);
+	if (check_active_state(L)) // only remove those, we know about
+		activeStates.remove(L);
 }
 
 bool check_active_state(lua_State* L)
@@ -121,50 +122,49 @@ bool check_active_state(lua_State* L)
 	return false;
 }
 
-void luaF_close(lua_State* L)
+void luaH_close(lua_State* L)
 {
 	remove_active_state(L);
 	lua_close_exe(L);
 }
 
-void* luaF_newstate(void* _this, char a, char b, int c)
+void* ctor_lua_State_new(void* ud, void* ptr, size_t osize, size_t nsize)
 {
-	void* ret = reinterpret_cast<void*>(luaL_newstate_exe(_this, a, b, c));
+	void* ret = reinterpret_cast<void*>(ctor_lua_State_exe(ud, ptr, osize, nsize));
+	lua_State* L = (lua_State*)*((void**)ud);
+	size_t pVal = reinterpret_cast<size_t>(ptr);
 
-	lua_State* L = (lua_State*)*((void**)_this);
+	if (ret && L && pVal == 1 && osize == 1) {
+		PD2HOOK_LOG_LOG("Lua State: 0x{0:016x}", reinterpret_cast<size_t>(L));
 
-	PD2HOOK_LOG_LOG("Lua State: 0x{0:016x}", reinterpret_cast<uint64_t>(L));
+		add_active_state(L);
 
-	if (!L)
-		return ret;
-
-	add_active_state(L);
-
-	if (s_LuaNewStateCallback != nullptr)
-		s_LuaNewStateCallback(L);
+		if (s_LuaNewStateCallback != nullptr)
+			s_LuaNewStateCallback(L);
+	}
 
 	return ret;
 }
 
 #define LUA_FUNCTION_PATTERN_HOOK(name, target) \
 	auto name ## _hook = CreateFunctionHook(#name, target, name ## _pattern);
- 
-LUA_FUNCTION_PATTERN_HOOK(lua_call, luaF_call)
-LUA_FUNCTION_PATTERN_HOOK(luaL_newstate, luaF_newstate)
-LUA_FUNCTION_PATTERN_HOOK(lua_close, luaF_close)
+
+LUA_FUNCTION_PATTERN_HOOK(lua_call, luaH_call)
+LUA_FUNCTION_PATTERN_HOOK(lua_close, luaH_close)
+LUA_FUNCTION_PATTERN_HOOK(ctor_lua_State, ctor_lua_State_new)
 
 #define DEFINE_LUA_PATTERN_FUNC(name, ret, ...) \
 	ret(*name)(__VA_ARGS__) = FindFunctionAddress<ret, __VA_ARGS__>(#name, name ## _pattern);
 
 void(*lua_call_exe)(lua_State*, int, int) = nullptr;
-void* (*luaL_newstate_exe)(void*, char, char, int) = nullptr;
 void(*lua_close_exe)(lua_State*) = nullptr;
+void* (*ctor_lua_State_exe)(void*, void*, size_t, size_t) = nullptr;
 
 void lua_init(void(*luaFuncReg)(lua_State* L))
 {
 	lua_call_hook.GetNewFunction(lua_call_exe);
-	luaL_newstate_hook.GetNewFunction(luaL_newstate_exe);
 	lua_close_hook.GetNewFunction(lua_close_exe);
+	ctor_lua_State_hook.GetNewFunction(ctor_lua_State_exe);
 
 	s_LuaNewStateCallback = luaFuncReg;
 }
