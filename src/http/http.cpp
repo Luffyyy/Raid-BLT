@@ -158,9 +158,9 @@ namespace pd2hook
 		PD2HOOK_TRACE_FUNC;
 		std::unique_ptr<HTTPItem> item(raw_item);
 
-		CURL* curl;
 		{
 			std::lock_guard<std::mutex> lock(curlLock);
+			CURL* curl;
 			curl = curl_easy_init();
 
 			curl_easy_setopt(curl, CURLOPT_URL, item->url.c_str());
