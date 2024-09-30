@@ -26,6 +26,8 @@ namespace pd2hook
 
 	static HTTPManager *s_httpSingleton = nullptr; // exit crash fix
 
+	static std::mutex curlLock;
+
 	using HTTPProgressNotificationPtr = std::unique_ptr<HTTPProgressNotification>;
 	using HTTPItemPtr = std::unique_ptr<HTTPItem>;
 	PD2HOOK_REGISTER_EVENTQUEUE(HTTPProgressNotificationPtr, HTTPProgressNotification)
@@ -155,36 +157,35 @@ namespace pd2hook
 	{
 		PD2HOOK_TRACE_FUNC;
 		std::unique_ptr<HTTPItem> item(raw_item);
-		CURL *curl;
-		curl = curl_easy_init();
-		curl_easy_setopt(curl, CURLOPT_URL, item->url.c_str());
-		curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
 
-		curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 30L);
-		curl_easy_setopt(curl, CURLOPT_TIMEOUT, 900L);
-		curl_easy_setopt(curl, CURLOPT_LOW_SPEED_TIME, 30L);
-		curl_easy_setopt(curl, CURLOPT_LOW_SPEED_LIMIT, 1000L);
-
-		if (item->progress)
+		CURL* curl;
 		{
-			curl_easy_setopt(curl, CURLOPT_XFERINFOFUNCTION, http_progress_call);
-			curl_easy_setopt(curl, CURLOPT_XFERINFODATA, item.get());
-			curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0);
-		}
+			std::lock_guard<std::mutex> lock(curlLock);
+			curl = curl_easy_init();
 
-		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_http_data);
-		curl_easy_setopt(curl, CURLOPT_WRITEDATA, item.get());
+			curl_easy_setopt(curl, CURLOPT_URL, item->url.c_str());
+			curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+			curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+			curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
 
-		auto res = curl_easy_perform(curl);
+			curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 30L);
+			curl_easy_setopt(curl, CURLOPT_TIMEOUT, 900L);
+			curl_easy_setopt(curl, CURLOPT_LOW_SPEED_TIME, 30L);
+			curl_easy_setopt(curl, CURLOPT_LOW_SPEED_LIMIT, 1000L);
 
-		try
-		{
+			if (item->progress)
+			{
+				curl_easy_setopt(curl, CURLOPT_XFERINFOFUNCTION, http_progress_call);
+				curl_easy_setopt(curl, CURLOPT_XFERINFODATA, item.get());
+				curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0);
+			}
+
+			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_http_data);
+			curl_easy_setopt(curl, CURLOPT_WRITEDATA, item.get());
+
+			curl_easy_perform(curl);
+
 			curl_easy_cleanup(curl);
-		}
-		catch (...) {
-			PD2HOOK_LOG_WARN("CURL cleanup failed.");
 		}
 
 		GetHTTPItemQueue().AddToQueue(run_http_event, std::move(item));
@@ -205,37 +206,35 @@ namespace pd2hook
 
 	void HTTPManager::DownloadFile(std::string_view strUrl, std::string_view strDestination)
 	{
-		CURL *curl;
-		curl = curl_easy_init();
+		FILE* fp = fopen(strDestination.data(), "wb");
 
-		auto ver = curl_version_info(CURLVERSION_NOW);
-		auto test = ver->libssh_version;
-
-		auto res = curl_easy_setopt(curl, CURLOPT_URL, strUrl.data());
-		res = curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-		res = curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-		res = curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
-
-		res = curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 30L);
-		res = curl_easy_setopt(curl, CURLOPT_TIMEOUT, 900L);
-		res = curl_easy_setopt(curl, CURLOPT_LOW_SPEED_TIME, 30L);
-		res = curl_easy_setopt(curl, CURLOPT_LOW_SPEED_LIMIT, 1000L);
-
-		FILE *fp = fopen(strDestination.data(), "wb");
-
-		res = curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data_to_file);
-		res = curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
-
-		res = curl_easy_perform(curl);
-
-		try
 		{
+			std::lock_guard<std::mutex> lock(curlLock);
+			CURL* curl;
+			curl = curl_easy_init();
+
+			auto ver = curl_version_info(CURLVERSION_NOW);
+			auto test = ver->libssh_version;
+
+			curl_easy_setopt(curl, CURLOPT_URL, strUrl.data());
+			curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+			curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+			curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+
+			curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 30L);
+			curl_easy_setopt(curl, CURLOPT_TIMEOUT, 900L);
+			curl_easy_setopt(curl, CURLOPT_LOW_SPEED_TIME, 30L);
+			curl_easy_setopt(curl, CURLOPT_LOW_SPEED_LIMIT, 1000L);
+
+			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data_to_file);
+			curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+
+			curl_easy_perform(curl);
+
 			curl_easy_cleanup(curl);
 		}
-		catch (...) {
-			PD2HOOK_LOG_WARN("CURL cleanup failed.");
-		}
 
-		fclose(fp);
+		if (fp)
+			fclose(fp);
 	}
 }
