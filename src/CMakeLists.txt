@@ -42,7 +42,10 @@ set(IPHLPAPI_SOURCES
 
 add_library(IPHLPAPI SHARED ${IPHLPAPI_SOURCES})
 
-target_link_libraries(IPHLPAPI PUBLIC Ws2_32 libcryptoMT libsslMT Wldap32 libcurl zlibstatic minhook Zycore Zydis Version lua51)
+target_link_libraries(IPHLPAPI PUBLIC Ws2_32 libcryptoMT libsslMT Wldap32 libcurl zlibstatic minhook Zycore Zydis Version lua51-objects
+    ${CMAKE_CURRENT_SOURCE_DIR}/Lua/luajit/lj_vm.obj)
+
+target_compile_definitions(IPHLPAPI PUBLIC LUA_BUILD_AS_DLL LUA_LIB)
 
 target_include_directories(IPHLPAPI PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/../lib/openssl-1.1.0f-vs2017/Include64 
                 ${CMAKE_CURRENT_SOURCE_DIR}/../lib/minhook/include ${CMAKE_CURRENT_SOURCE_DIR}/../lib/zlib-1.2.11 ${CMAKE_BINARY_DIR}/lib/zlib-1.2.11)

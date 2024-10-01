@@ -70,6 +70,8 @@ set(LUA51_SOURCES
     luajit/src/lj_udata.c
     luajit/src/lj_vmevent.c
     luajit/src/lj_vmmath.c
+
+    lj_vm.obj
 )
 
 set(LUA51_BUILDVM_SOURCES
@@ -84,16 +86,20 @@ set(LUAJIT_SOURCES
     luajit/src/luajit.c
 )
 
-add_library(lua51 STATIC ${LUA51_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/lj_vm.obj)
-add_library(lua51-shared SHARED ${LUA51_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/lj_vm.obj)
+add_library(lua51 STATIC ${LUA51_SOURCES})
+add_library(lua51-objects OBJECT ${LUA51_SOURCES})
+add_library(lua51-shared SHARED ${LUA51_SOURCES})
 add_executable(LuaBuildVM ${LUA51_BUILDVM_SOURCES})
 
 add_executable(luajit ${LUAJIT_SOURCES})
 
-target_link_libraries(luajit lua51 ${CMAKE_CURRENT_SOURCE_DIR}/lj_vm.obj)
+target_link_libraries(luajit PUBLIC lua51)
+
+target_compile_definitions(lua51-objects PUBLIC LUA_BUILD_AS_DLL)
 
 target_include_directories(lua51 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/luajit/src)
 target_include_directories(lua51-shared PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/luajit/src)
+target_include_directories(lua51-objects PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/luajit/src)
 target_include_directories(LuaBuildVM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/luajit/src)
 target_include_directories(luajit PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/luajit/src)
 
@@ -108,6 +114,11 @@ set_property(TARGET lua51-shared PROPERTY
              MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
 set_property(TARGET lua51-shared PROPERTY CXX_STANDARD 20)
+
+set_property(TARGET lua51-objects PROPERTY
+             MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
+set_property(TARGET lua51-objects PROPERTY CXX_STANDARD 20)
 
 set_property(TARGET LuaBuildVM PROPERTY
              MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
