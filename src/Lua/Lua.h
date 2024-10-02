@@ -19,4 +19,6 @@ void lua_init(void(*luaFuncReg)(lua_State* L));
 
 bool check_active_state(lua_State* L);
 
+void UpdateStates();
+
 FunctionHook<void, lua_State*, int, int>& GetNewCallFunctionHook();

@@ -6,6 +6,8 @@
 
 #include <thread>
 
+#include "Lua/Lua.h"
+
 static int32_t s_updates = 0;
 std::thread::id main_thread_id;
 
@@ -33,6 +35,8 @@ void* application_update_new(void* thisptr, long long llUnk0)
 	{
 		pd2hook::EventQueueMaster::GetSingleton().ProcessEvents();
 	}
+
+	UpdateStates();
 
 	s_updates++;
 	return application_update(thisptr, llUnk0);

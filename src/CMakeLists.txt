@@ -36,6 +36,8 @@ set(IPHLPAPI_SOURCES
     util/files.cpp
     util/util.cpp
     util/util.h
+	plugins/plugins.h
+	plugins/plugins.cpp
 	../Resource.h
 	../Resource.rc
 )
