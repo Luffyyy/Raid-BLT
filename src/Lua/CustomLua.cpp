@@ -6,6 +6,8 @@
 
 #include <filesystem>
 
+#include "plugins/plugins.h"
+
 int luaF_GetDllVersion(lua_State *L)
 {
 	HMODULE hModule;
@@ -436,6 +438,39 @@ int luaF_moveDirectory(lua_State *L)
 	return 1;
 }
 
+int luaF_load_native(lua_State* L)
+{
+	std::string file(lua_tostring(L, 1));
+
+	try
+	{
+		blt::plugins::Plugin* plugin = NULL;
+		blt::plugins::PluginLoadResult result = blt::plugins::LoadPlugin(file, &plugin);
+
+		// TODO some kind of UUID system to prevent issues with multiple mods having the same DLL
+
+		int count = plugin->PushLuaValue(L);
+
+		if (result == blt::plugins::plr_AlreadyLoaded)
+		{
+			lua_pushstring(L, "Already loaded");
+		}
+		else
+		{
+			lua_pushboolean(L, true);
+		}
+
+		lua_insert(L, -1 - count);
+		return count + 1;
+
+	}
+	catch (std::string err)
+	{
+		luaL_error(L, err.c_str());
+		return 0; // Fix the no-return compiler warning, but this will never be called
+	}
+}
+
 void register_lua_functions(lua_State *L)
 {
 	lua_pushcclosure(L, luaF_print, 0);
@@ -476,8 +511,14 @@ void register_lua_functions(lua_State *L)
 		{"forcepcalls", luaF_forcepcalls},
 		{"GetDllVersion", luaF_GetDllVersion},
 		{"EnableApplicationLog", luaF_EnableApplicationLog},
+		{"load_native", luaF_load_native},
 		{NULL, NULL}};
 	luaL_register(L, "blt", bltLib);
+
+	for (blt::plugins::Plugin* plugin : blt::plugins::GetPlugins())
+	{
+		plugin->AddToState(L);
+	}
 
 	int result;
 	PD2HOOK_LOG_LOG("Initiating Hook");

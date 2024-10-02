@@ -4,6 +4,7 @@
 #include "Logger.h"
 
 #include <list>
+#include <plugins/plugins.h>
 
 template<typename TRet, typename... TArgs>
 auto FindFunctionAddress(std::string_view strName, std::string_view strPattern)
@@ -172,4 +173,24 @@ void lua_init(void(*luaFuncReg)(lua_State* L))
 FunctionHook<void, lua_State*, int, int>& GetNewCallFunctionHook()
 {
 	return lua_call_hook;
+}
+
+void blt::plugins::RegisterPluginForActiveStates(blt::plugins::Plugin* plugin)
+{
+	for (lua_State*& state : activeStates)
+	{
+		plugin->AddToState(state);
+	}
+}
+
+void UpdateStates()
+{
+	for (lua_State*& state : activeStates) {
+
+		// update native plugins
+		for (blt::plugins::Plugin* plugin : blt::plugins::GetPlugins())
+		{
+			plugin->Update(state);
+		}
+	}
 }
