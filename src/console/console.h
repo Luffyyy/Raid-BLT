@@ -1,5 +1,4 @@
-#ifndef __CONSOLE_HEADER__
-#define __CONSOLE_HEADER__
+#pragma once
 
 // Credit: Christopher Oicles
 // http://stackoverflow.com/questions/16500726/open-write-to-console-from-a-c-dll
@@ -14,5 +13,3 @@ public:
 	CConsole();
 	~CConsole();
 };
-
-#endif

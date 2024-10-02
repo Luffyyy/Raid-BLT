@@ -1,5 +1,4 @@
-#ifndef __FUNCTIONHOOK_H__
-#define __FUNCTIONHOOK_H__
+#pragma once
 
 #include "Logger.h"
 #include "SearchRange.h"
@@ -38,7 +37,7 @@ public:
 	{ }
 
 	virtual ~FunctionHook()
-	{ 
+	{
 		Destroy();
 	}
 
@@ -115,5 +114,3 @@ inline FunctionHook<TRet, TArgs...> CreateFunctionHook(std::string_view strName,
 
 	return FunctionHook<TRet, TArgs...>(strName, targetFunc, reinterpret_cast<TRet(*)(TArgs...)>(pAddress));
 }
-
-#endif

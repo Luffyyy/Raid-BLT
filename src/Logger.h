@@ -1,5 +1,4 @@
-#ifndef __LOGGER_H__
-#define __LOGGER_H__
+#pragma once
 
 #include <string_view>
 #include <fstream>
@@ -28,6 +27,8 @@ public:
 	static void DestroyInstance();
 
 	void Log(LogType type, std::string_view strText, std::string_view file, int32_t line);
+
+	LogType getLoggingLevel();
 
 	void OpenConsole();
 	void DestroyConsole();
@@ -68,5 +69,3 @@ private:
 #define PD2HOOK_LOG_LUA_WARN(msg) PD2HOOK_LOG_WARN(msg)
 #define PD2HOOK_LOG_LUA_ERROR(msg) PD2HOOK_LOG_ERROR(msg)
 #define PD2HOOK_LOG_LUA_LOG(msg) PD2HOOK_LOG_LOG(msg)
-
-#endif

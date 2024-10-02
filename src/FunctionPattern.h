@@ -1,5 +1,4 @@
-#ifndef __FUNCTIONPATTERN_H__
-#define __FUNCTIONPATTERN_H__
+#pragma once
 
 #include <string_view>
 
@@ -14,5 +13,3 @@ DEFINE_LUA_FUNCTION_PATTERN(application_update, "48 89 5C 24 10 48 89 6C 24 18 4
 DEFINE_LUA_FUNCTION_PATTERN(lua_application_register, "48 89 5C 24 08 48 89 7C 24 10 55 48 8B EC 48 83 EC 40 48 8B D9 65 48 8B 04 25 58 00 00 00 B9 80")
 
 #undef DEFINE_LUA_FUNCTION_PATTERN
-
-#endif

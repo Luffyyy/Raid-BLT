@@ -1,5 +1,4 @@
-#ifndef __HTTP_HEADER__
-#define __HTTP_HEADER__
+#pragma once
 
 #include <string>
 #include <mutex>
@@ -74,5 +73,3 @@ namespace pd2hook
 		bool m_bLocksInit;
 	};
 }
-
-#endif // __HTTP_HEADER__

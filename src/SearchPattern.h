@@ -1,5 +1,4 @@
-#ifndef __SEARCHPATTERN_H__
-#define __SEARCHPATTERN_H__
+#pragma once
 
 #include <string_view>
 #include <vector>
@@ -33,5 +32,3 @@ private:
 	std::string_view m_strPattern;
 	std::vector<NibblePattern> m_nibbles;
 };
-
-#endif
