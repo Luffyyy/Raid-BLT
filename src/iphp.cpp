@@ -1,16 +1,19 @@
 #include <windows.h>
+#include <filesystem>
 #include "InitState.h"
 
 #pragma pack(1)
 
 HINSTANCE hLThis = 0;
+HINSTANCE hLDebugger = 0;
 HINSTANCE hL = 0;
-FARPROC p[267] = {0};
+FARPROC p[267] = { 0 };
 
 BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID)
 {
 	if (reason == DLL_PROCESS_ATTACH)
 	{
+		DisableThreadLibraryCalls(hInst);
 		hLThis = hInst;
 
 		char bufd[MAX_PATH];
@@ -289,11 +292,18 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID)
 		p[265] = GetProcAddress(hL, "if_nametoindex");
 		p[266] = GetProcAddress(hL, "register_icmp");
 
+		if (std::filesystem::exists("DieselLuaDebugger.dll"))
+			hLDebugger = LoadLibrary("DieselLuaDebugger.dll");
+		
 		pd2hook::InitiateStates();
 	}
 	if (reason == DLL_PROCESS_DETACH)
 	{
 		pd2hook::DestroyStates();
+
+		if (hLDebugger)
+			FreeLibrary(hLDebugger);
+
 		FreeLibrary(hL);
 	}
 
@@ -685,9 +695,9 @@ extern "C" void __stdcall __E__61__()
 }
 
 // GetAdaptersInfo
-extern "C" /*__declspec(naked)*/ DWORD __stdcall __E__62__(void *pAdapterInfo, void *pOutBufLen)
+extern "C" DWORD __stdcall __E__62__(void* pAdapterInfo, void* pOutBufLen)
 {
-	typedef DWORD(__stdcall * pS)(void *, void *);
+	typedef DWORD(__stdcall* pS)(void*, void*);
 	pS pps = (pS)p[0 * 4];
 	return pps(pAdapterInfo, pOutBufLen);
 }
@@ -813,9 +823,9 @@ extern "C" void __stdcall __E__82__()
 }
 
 // GetIpAddrTable
-extern "C" /*__declspec(naked)*/ DWORD __stdcall __E__83__(void *pIpAddrTable, void *pdwSize, BOOL bOrder)
+extern "C" DWORD __stdcall __E__83__(void* pIpAddrTable, void* pdwSize, BOOL bOrder)
 {
-	typedef DWORD(__stdcall * pS)(void *, void *, BOOL);
+	typedef DWORD(__stdcall* pS)(void*, void*, BOOL);
 	pS pps = (pS)p[1 * 4];
 	return pps(pIpAddrTable, pdwSize, bOrder);
 }
