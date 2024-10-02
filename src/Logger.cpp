@@ -165,3 +165,7 @@ void Logger::WriteMessage(LogType type, std::string_view strFullFormattedText, s
 		printf("%s\n", strFormattedText.data());
 	}
 }
+
+LogType Logger::getLoggingLevel() {
+	return m_currentLogLevel;
+}

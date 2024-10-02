@@ -9,7 +9,7 @@
 int luaF_GetDllVersion(lua_State *L)
 {
 	HMODULE hModule;
-	GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS, (LPCTSTR)luaF_GetDllVersion, &hModule);
+	GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS, reinterpret_cast<LPCTSTR>(luaF_GetDllVersion), &hModule);
 	char path[MAX_PATH + 1];
 	size_t pathSize = GetModuleFileName(hModule, path, sizeof(path) - 1);
 	path[pathSize] = '\0';

@@ -1,5 +1,4 @@
-#ifndef __LUA_H__
-#define __LUA_H__
+#pragma once
 
 #include "FunctionHook.h"
 #include <memory>
@@ -21,5 +20,3 @@ void lua_init(void(*luaFuncReg)(lua_State* L));
 bool check_active_state(lua_State* L);
 
 FunctionHook<void, lua_State*, int, int>& GetNewCallFunctionHook();
-
-#endif

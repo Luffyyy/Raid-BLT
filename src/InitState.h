@@ -1,10 +1,7 @@
-#ifndef __INIT_STATE__
-#define __INIT_STATE__
+#pragma once
 
 namespace pd2hook
 {
-void InitiateStates();
-void DestroyStates();
+	void InitiateStates();
+	void DestroyStates();
 }
-
-#endif

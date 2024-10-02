@@ -1,5 +1,4 @@
-#ifndef __SEARCHRANGE_H__
-#define __SEARCHRANGE_H__
+#pragma once
 
 class SearchRange
 {
@@ -13,5 +12,3 @@ private:
 
 	static void Init();
 };
-
-#endif

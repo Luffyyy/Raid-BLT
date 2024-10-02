@@ -1,5 +1,4 @@
-#ifndef __DISASSEMBLER_H__
-#define __DISASSEMBLER_H__
+#pragma once
 
 #include <Zydis/Zydis.h>
 
@@ -11,6 +10,4 @@ struct InstructionOperand
 	ZydisDecodedOperand Operands[ZYDIS_MAX_OPERAND_COUNT];
 };
 
-void Dissassemble(const void *pAddress, size_t size, std::map<uint64_t, InstructionOperand> &instructions);
-
-#endif
+void Dissassemble(const void* pAddress, size_t size, std::map<uint64_t, InstructionOperand>& instructions);
